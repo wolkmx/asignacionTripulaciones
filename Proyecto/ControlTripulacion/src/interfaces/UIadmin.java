@@ -17,9 +17,9 @@ public class UIadmin extends javax.swing.JFrame {
     public UIadmin() {
         initComponents();
         this.setLocationRelativeTo(null);
-        panelPiloto.setEnabled(false);
-        panelVuelo.setEnabled(false);
-        panelPiloto.setLocation(600, 10);
+        card.setVisible(false);
+        panelPiloto.setVisible(false);
+        panelVuelo.setVisible(false);
     }
 
     /**
@@ -31,11 +31,60 @@ public class UIadmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nieblaButtonGroup = new javax.swing.ButtonGroup();
+        relampagosButtonGroup = new javax.swing.ButtonGroup();
+        lluviaButtonGroup = new javax.swing.ButtonGroup();
+        vientoButtonGroup = new javax.swing.ButtonGroup();
+        turbulenciaButtonGroup = new javax.swing.ButtonGroup();
         returnButton = new javax.swing.JButton();
         addPiloto = new javax.swing.JButton();
         addVuelo = new javax.swing.JButton();
+        card = new javax.swing.JPanel();
         panelPiloto = new javax.swing.JPanel();
+        labelNombre = new javax.swing.JLabel();
+        inputNombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        inputNoEmpleado = new javax.swing.JTextField();
+        inputFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        inputNoVuelos = new javax.swing.JTextField();
+        inputHorasVuelo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inputObservaciones = new javax.swing.JTextArea();
+        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         panelVuelo = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        inputOrigen = new javax.swing.JTextField();
+        inputDestino = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        inputFechaVuelo = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        siNiebla = new javax.swing.JRadioButton();
+        noNiebla = new javax.swing.JRadioButton();
+        jLabel11 = new javax.swing.JLabel();
+        siRelampagos = new javax.swing.JRadioButton();
+        noRelampagos = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
+        luzSolar = new javax.swing.JSlider();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        cancelDVButton = new javax.swing.JButton();
+        saveDVButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -46,7 +95,6 @@ public class UIadmin extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/return.png"))); // NOI18N
-        returnButton.setBorder(null);
         returnButton.setBorderPainted(false);
         returnButton.setContentAreaFilled(false);
         returnButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -58,49 +106,389 @@ public class UIadmin extends javax.swing.JFrame {
                 returnButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 11, -1, -1));
+        getContentPane().add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
 
+        addPiloto.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
+        addPiloto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add.png"))); // NOI18N
         addPiloto.setText("Agregar Piloto");
+        addPiloto.setHideActionText(true);
+        addPiloto.setIconTextGap(20);
         addPiloto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPilotoActionPerformed(evt);
             }
         });
-        getContentPane().add(addPiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+        getContentPane().add(addPiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 160, -1));
 
+        addVuelo.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
+        addVuelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add.png"))); // NOI18N
         addVuelo.setText("Agregar Vuelo");
-        getContentPane().add(addVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        addVuelo.setIconTextGap(20);
+        addVuelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addVueloActionPerformed(evt);
+            }
+        });
+        getContentPane().add(addVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 160, -1));
 
-        panelPiloto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Piloto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 12))); // NOI18N
-        panelPiloto.setEnabled(false);
+        card.setMaximumSize(new java.awt.Dimension(600, 450));
+        card.setMinimumSize(new java.awt.Dimension(600, 450));
+        card.setPreferredSize(new java.awt.Dimension(600, 450));
+        card.setLayout(new java.awt.CardLayout());
+
+        panelPiloto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Piloto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 18))); // NOI18N
+        panelPiloto.setMaximumSize(new java.awt.Dimension(550, 500));
+        panelPiloto.setMinimumSize(new java.awt.Dimension(550, 500));
+        panelPiloto.setPreferredSize(new java.awt.Dimension(550, 500));
+
+        labelNombre.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        labelNombre.setText("Nombre: ");
+
+        jLabel2.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel2.setText("No. Empleado:");
+
+        jLabel1.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel1.setText("Fecha de Nacimiento: ");
+
+        jLabel3.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel3.setText("Número de Vuelos: ");
+
+        jLabel4.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel4.setText("Horas de Vuelo: ");
+
+        inputNoVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNoVuelosActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel5.setText("Observaciones: ");
+
+        inputObservaciones.setColumns(20);
+        inputObservaciones.setRows(5);
+        jScrollPane1.setViewportView(inputObservaciones);
+
+        cancelButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.png"))); // NOI18N
+        cancelButton.setText("Cancelar");
+
+        saveButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
+        saveButton.setText("Guardar");
 
         javax.swing.GroupLayout panelPilotoLayout = new javax.swing.GroupLayout(panelPiloto);
         panelPiloto.setLayout(panelPilotoLayout);
         panelPilotoLayout.setHorizontalGroup(
             panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(panelPilotoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPilotoLayout.createSequentialGroup()
+                        .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(inputNoVuelos)
+                            .addComponent(inputFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPilotoLayout.createSequentialGroup()
+                                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelNombre)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(inputNoEmpleado)
+                            .addComponent(jLabel4)
+                            .addComponent(inputHorasVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
+                    .addGroup(panelPilotoLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPilotoLayout.createSequentialGroup()
+                        .addGap(0, 348, Short.MAX_VALUE)
+                        .addComponent(cancelButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveButton)))
+                .addContainerGap())
         );
         panelPilotoLayout.setVerticalGroup(
             panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGroup(panelPilotoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNombre)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputNoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputNoVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputHorasVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
+                    .addComponent(saveButton))
+                .addGap(19, 19, 19))
         );
 
-        getContentPane().add(panelPiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 370, 530));
+        card.add(panelPiloto, "card6");
 
-        panelVuelo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Vuelo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 12))); // NOI18N
+        panelVuelo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Vuelo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 18))); // NOI18N
+        panelVuelo.setMaximumSize(new java.awt.Dimension(600, 550));
+        panelVuelo.setMinimumSize(new java.awt.Dimension(550, 500));
+        panelVuelo.setPreferredSize(new java.awt.Dimension(550, 500));
+
+        jLabel6.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel6.setText("Origen: ");
+
+        jLabel7.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel7.setText("Destino: ");
+
+        jLabel8.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel8.setText("Fecha de Salida: ");
+
+        jLabel9.setFont(new java.awt.Font("HP Simplified", 0, 18)); // NOI18N
+        jLabel9.setText("Condiciones Meteorológicas");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visibilidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 18))); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel10.setText("Niebla");
+
+        nieblaButtonGroup.add(siNiebla);
+        siNiebla.setText("Si");
+        siNiebla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siNieblaActionPerformed(evt);
+            }
+        });
+
+        nieblaButtonGroup.add(noNiebla);
+        noNiebla.setText("No");
+
+        jLabel11.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel11.setText("Relampagos");
+
+        relampagosButtonGroup.add(siRelampagos);
+        siRelampagos.setText("Si");
+        siRelampagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siRelampagosActionPerformed(evt);
+            }
+        });
+
+        relampagosButtonGroup.add(noRelampagos);
+        noRelampagos.setText("No");
+
+        jLabel12.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel12.setText("Cantidad de Luz Solar");
+
+        luzSolar.setMajorTickSpacing(10);
+        luzSolar.setMaximum(10);
+        luzSolar.setMinorTickSpacing(1);
+        luzSolar.setPaintLabels(true);
+        luzSolar.setPaintTicks(true);
+        luzSolar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(siNiebla)
+                    .addComponent(noNiebla))
+                .addGap(79, 79, 79)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(noRelampagos)
+                    .addComponent(siRelampagos))
+                .addGap(66, 66, 66)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(luzSolar, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(siNiebla)
+                            .addComponent(siRelampagos))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(noNiebla)
+                            .addComponent(noRelampagos)))
+                    .addComponent(luzSolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Meteorológia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 18))); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel13.setText("Lluvia");
+
+        jLabel14.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel14.setText("Viento");
+
+        jLabel15.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel15.setText("Turbulencia");
+
+        lluviaButtonGroup.add(jRadioButton1);
+        jRadioButton1.setText("Si");
+
+        lluviaButtonGroup.add(jRadioButton2);
+        jRadioButton2.setText("No");
+
+        vientoButtonGroup.add(jRadioButton3);
+        jRadioButton3.setText("Si");
+
+        vientoButtonGroup.add(jRadioButton4);
+        jRadioButton4.setText("No");
+
+        turbulenciaButtonGroup.add(jRadioButton5);
+        jRadioButton5.setText("Si");
+
+        turbulenciaButtonGroup.add(jRadioButton6);
+        jRadioButton6.setText("No");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(75, 75, 75)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4))
+                .addGap(101, 101, 101)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton6)
+                    .addComponent(jRadioButton5)
+                    .addComponent(jLabel15))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton4)
+                    .addComponent(jRadioButton6))
+                .addGap(0, 16, Short.MAX_VALUE))
+        );
+
+        cancelDVButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
+        cancelDVButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.png"))); // NOI18N
+        cancelDVButton.setText("Cancelar");
+
+        saveDVButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
+        saveDVButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
+        saveDVButton.setText("Guardar");
 
         javax.swing.GroupLayout panelVueloLayout = new javax.swing.GroupLayout(panelVuelo);
         panelVuelo.setLayout(panelVueloLayout);
         panelVueloLayout.setHorizontalGroup(
             panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(panelVueloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelVueloLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVueloLayout.createSequentialGroup()
+                        .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelVueloLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cancelDVButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(saveDVButton))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelVueloLayout.createSequentialGroup()
+                                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                    .addComponent(inputFechaVuelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(inputOrigen, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inputDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))))
+                        .addGap(23, 23, 23))))
         );
         panelVueloLayout.setVerticalGroup(
             panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGroup(panelVueloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputFechaVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelDVButton)
+                    .addComponent(saveDVButton)))
         );
 
-        getContentPane().add(panelVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
+        card.add(panelVuelo, "card5");
+
+        getContentPane().add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 620, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,15 +500,81 @@ public class UIadmin extends javax.swing.JFrame {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void addPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPilotoActionPerformed
-        // TODO add your handling code here:
-        panelPiloto.setVisible(true);
+        card.setVisible(true);
+        card.add(panelVuelo);
     }//GEN-LAST:event_addPilotoActionPerformed
+
+    private void addVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVueloActionPerformed
+        card.setVisible(true);
+        card.add(panelPiloto);
+    }//GEN-LAST:event_addVueloActionPerformed
+
+    private void inputNoVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoVuelosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNoVuelosActionPerformed
+
+    private void siNieblaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siNieblaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_siNieblaActionPerformed
+
+    private void siRelampagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siRelampagosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_siRelampagosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPiloto;
     private javax.swing.JButton addVuelo;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton cancelDVButton;
+    private javax.swing.JPanel card;
+    private javax.swing.JTextField inputDestino;
+    private com.toedter.calendar.JDateChooser inputFechaNacimiento;
+    private com.toedter.calendar.JDateChooser inputFechaVuelo;
+    private javax.swing.JTextField inputHorasVuelo;
+    private javax.swing.JTextField inputNoEmpleado;
+    private javax.swing.JTextField inputNoVuelos;
+    private javax.swing.JTextField inputNombre;
+    private javax.swing.JTextArea inputObservaciones;
+    private javax.swing.JTextField inputOrigen;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.ButtonGroup lluviaButtonGroup;
+    private javax.swing.JSlider luzSolar;
+    private javax.swing.ButtonGroup nieblaButtonGroup;
+    private javax.swing.JRadioButton noNiebla;
+    private javax.swing.JRadioButton noRelampagos;
     private javax.swing.JPanel panelPiloto;
     private javax.swing.JPanel panelVuelo;
+    private javax.swing.ButtonGroup relampagosButtonGroup;
     private javax.swing.JButton returnButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton saveDVButton;
+    private javax.swing.JRadioButton siNiebla;
+    private javax.swing.JRadioButton siRelampagos;
+    private javax.swing.ButtonGroup turbulenciaButtonGroup;
+    private javax.swing.ButtonGroup vientoButtonGroup;
     // End of variables declaration//GEN-END:variables
 }
