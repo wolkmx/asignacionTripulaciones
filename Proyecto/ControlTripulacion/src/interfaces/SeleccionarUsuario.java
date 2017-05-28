@@ -37,7 +37,6 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         setTitle("Air MOO");
         setMaximumSize(new java.awt.Dimension(700, 400));
         setMinimumSize(new java.awt.Dimension(700, 400));
-        setPreferredSize(new java.awt.Dimension(700, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -5,10 +5,15 @@
  */
 package builder;
 
+import Bridge.Aeropuerto;
+
 /**
  *
  * @author Cristian Enríquez
  */
-public class Clase {
-        //Eliminar, la creé solo para que se creara el directorio en git
+public interface IConstructor {
+    public void tipoDeAeropuerto(String tipo);
+    public void nombreAerolinea(String nombre);
+    public void id(int id);
+    public Aeropuerto getAeropuerto();
 }

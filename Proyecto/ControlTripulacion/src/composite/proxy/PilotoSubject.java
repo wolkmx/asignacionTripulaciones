@@ -5,10 +5,12 @@
  */
 package composite.proxy;
 
+import template.Usuario;
+
 /**
  *
  * @author Cristian Enríquez
  */
-public interface PilotoSubject {
+public interface PilotoSubject{
     
 }
