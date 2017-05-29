@@ -11,9 +11,9 @@ import Bridge.Aeropuerto;
  *
  * @author martina24
  */
-public class ConstructorConcretoAeropuerto implements IConstructor{
+public class AeropuertoConstructorConcreto implements IConstructor{
     Aeropuerto aeropuesto;
-    public ConstructorConcretoAeropuerto(){
+    public AeropuertoConstructorConcreto(){
         this.aeropuesto=new Aeropuerto();
     }
     @Override

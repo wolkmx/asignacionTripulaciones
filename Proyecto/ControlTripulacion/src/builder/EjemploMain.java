@@ -13,7 +13,7 @@ import Bridge.Aeropuerto;
  */
 public class EjemploMain {
     public static void main(String []args){
-        IConstructor constructor=new ConstructorConcretoAeropuerto();
+        IConstructor constructor=new AeropuertoConstructorConcreto();
         DirectorAeropuerto director=new DirectorAeropuerto(constructor);
         director.constructAeropuerto(1, "Pekin", "origen");
         Aeropuerto nuevoAeropuerto=director.getAeropuerto();

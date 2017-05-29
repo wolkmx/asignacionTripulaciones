@@ -5,10 +5,12 @@
  */
 package composite.singleton;
 
+import template.Usuario;
+
 /**
  *
  * @author Cristian Enríquez
  */
-public interface Tripulacion {
+public interface Tripulacion extends Usuario{
     
 }
