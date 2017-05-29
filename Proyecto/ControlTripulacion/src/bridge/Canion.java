@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Roberto Hernandez De La Luz <www.ohsioh.com>
  */
-public class Viento extends Meteorologica{
+public class Canion extends Orografica{
         @Override
     public List<String> getInfo() {
        List<String> respuesta = new ArrayList();

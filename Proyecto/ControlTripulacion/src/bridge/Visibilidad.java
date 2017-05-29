@@ -9,7 +9,7 @@ package bridge;
  *
  * @author Roberto Hernandez De La Luz <www.ohsioh.com>
  */
-public abstract class Meteorologica implements CondicionesVariables{
+public abstract class Visibilidad implements CondicionesVariables{
     
     private String nombre;
     private int dificultad;

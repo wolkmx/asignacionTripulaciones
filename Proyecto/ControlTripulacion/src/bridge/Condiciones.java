@@ -5,10 +5,12 @@
  */
 package bridge;
 
+import java.util.List;
+
 /**
  *
  * @author Roberto Hernandez De La Luz <www.ohsioh.com>
  */
 public interface Condiciones {
-    
+    public List<String> getInfo();
 }

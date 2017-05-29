@@ -10,5 +10,8 @@ package bridge;
  * @author Roberto Hernandez De La Luz <www.ohsioh.com>
  */
 public interface UsuarioCondiciones {
-    
+    public abstract Condiciones[] getMeteorologica();
+    public abstract Condiciones[] getVisibilidad();
+    public abstract Condiciones[] getOrografica();
+    public abstract Condiciones[] getTecnica();
 }

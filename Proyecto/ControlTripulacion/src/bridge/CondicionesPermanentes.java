@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bridge.escenario;
-
-import bridge.UsuarioCondiciones;
+package bridge;
 
 /**
  *
  * @author Roberto Hernandez De La Luz <www.ohsioh.com>
  */
-public class Escenario implements UsuarioCondiciones{
+public interface CondicionesPermanentes extends Condiciones{
     
 }
