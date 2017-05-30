@@ -11,16 +11,16 @@ import java.util.Date;
  *
  * @author Cristian Enríquez
  */
-public class TripulacionReal implements Tripulacion {
+public class TripulacionReal extends Tripulacion {
 
     Tripulacion tripulantes[] = new Tripulacion[2];
 
     //Singleton
     private static TripulacionReal tripulacion;
 
-    private TripulacionReal() {
+    public TripulacionReal() {
     }
-
+    
     public static TripulacionReal getTripulacion() {
         if (tripulacion == null) {
             tripulacion = new TripulacionReal();

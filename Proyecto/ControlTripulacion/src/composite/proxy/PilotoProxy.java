@@ -14,11 +14,11 @@ import java.util.Date;
  */
 public class PilotoProxy implements PilotoSubject, Tripulacion{
     private PilotoSubject piloto;
-    private PilotoSubject copiloto;
+    private boolean estado;
     
     public PilotoProxy(){
     piloto = new Piloto();
-    copiloto = new Copiloto();
+    estado = true;
     }
     
     public void setPassword(String password){
@@ -68,6 +68,19 @@ public class PilotoProxy implements PilotoSubject, Tripulacion{
     @Override
     public String getPassword() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PilotoSubject obtener() {
+        if(this.estado){
+            return this.piloto.obtener();
+        }else{
+            return null;
+        }
+    }
+    
+    public void setEstado(boolean estado){
+        this.estado = estado;
     }
     
     

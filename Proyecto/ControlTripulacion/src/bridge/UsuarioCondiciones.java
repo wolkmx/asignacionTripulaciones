@@ -13,5 +13,5 @@ public interface UsuarioCondiciones {
     public abstract Condiciones[] getMeteorologica();
     public abstract Condiciones[] getVisibilidad();
     public abstract Condiciones[] getOrografica();
-    public abstract Condiciones[] getTecnica();
+    public abstract Condiciones getTecnica();
 }

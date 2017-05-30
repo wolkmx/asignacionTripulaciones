@@ -11,6 +11,14 @@ import template.Usuario;
  *
  * @author Cristian Enríquez
  */
-public interface Tripulacion extends Usuario{
+public abstract class Tripulacion implements Usuario{
+    
+    private static Tripulacion instancia = null;
+    protected Tripulacion(){}
+    
+    public Tripulacion getInstancia(){
+        instancia = TripulacionReal.getTripulacion(); 
+        return instancia;
+    }
     
 }

@@ -11,6 +11,8 @@ import template.Usuario;
  *
  * @author Cristian Enríquez
  */
-public interface PilotoSubject{
+public interface PilotoSubject extends Usuario{
+    
+    public PilotoSubject obtener();
     
 }

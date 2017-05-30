@@ -60,7 +60,7 @@ public class Escenario implements UsuarioCondiciones, Cloneable{
 	}
 
     @Override
-    public Condiciones[] getTecnica() {
+    public Condiciones getTecnica() {
         throw new UnsupportedOperationException("Este tipo de Usuario de condiciones no usa las condiciones tecnicas"); //To change body of generated methods, choose Tools | Templates.
     }
     
