@@ -202,6 +202,11 @@ public class UIadmin extends javax.swing.JFrame {
         cancelButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.png"))); // NOI18N
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
@@ -665,6 +670,15 @@ public class UIadmin extends javax.swing.JFrame {
     private void inputNoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoEmpleadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputNoEmpleadoActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        inputNombre.setText(null);
+        inputFechaNacimiento.setDate(null);
+        inputNoEmpleado.setText(null);
+        inputHorasVuelo.setText(null);
+        inputNoVuelos.setText(null);
+        inputObservaciones.setText(null);
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPiloto;
