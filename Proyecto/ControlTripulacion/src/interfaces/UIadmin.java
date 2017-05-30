@@ -97,7 +97,7 @@ public class UIadmin extends javax.swing.JFrame {
         returnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/return.png"))); // NOI18N
         returnButton.setBorderPainted(false);
         returnButton.setContentAreaFilled(false);
-        returnButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        returnButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         returnButton.setFocusPainted(false);
         returnButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/return-p.png"))); // NOI18N
         returnButton.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/return-o.png"))); // NOI18N
@@ -303,7 +303,7 @@ public class UIadmin extends javax.swing.JFrame {
         luzSolar.setMinorTickSpacing(1);
         luzSolar.setPaintLabels(true);
         luzSolar.setPaintTicks(true);
-        luzSolar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        luzSolar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -480,7 +480,7 @@ public class UIadmin extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelDVButton)
                     .addComponent(saveDVButton)))

@@ -5,7 +5,7 @@
  */
 package builder;
 
-import Bridge.Aeropuerto;
+import bridge.Aeropuerto;
 
 /**
  *
