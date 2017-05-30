@@ -7,7 +7,7 @@ package composite.proxy;
 
 import composite.singleton.Tripulacion;
 import java.util.Date;
-
+//XXX
 /**
  *
  * @author Cristian Enríquez
