@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Cristian Enríquez
  */
-public class PilotoProxy implements PilotoSubject, Tripulacion{
+public class PilotoProxy extends Tripulacion implements PilotoSubject{
     private PilotoSubject piloto;
     private boolean estado;
     
