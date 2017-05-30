@@ -5,6 +5,18 @@
  */
 package interfaces;
 
+import composite.proxy.Piloto;
+import composite.proxy.PilotoProxy;
+import composite.proxy.PilotoSubject;
+import javax.swing.DefaultComboBoxModel;
+import almacen.Almacen;
+import static almacen.Almacen.registroPruebasSimulacion;
+import bridge.prototype.Escenario;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import registro.RegistroPruebasSimulacion;
+
 /**
  *
  * @author Cristian Enríquez
@@ -29,6 +41,16 @@ public class UIcontrol extends javax.swing.JFrame {
     private void initComponents() {
 
         returnButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxListadoPilotosOperador = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxListadoSimulacionPilotosOperador = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPaneResultadoSimulaciones = new javax.swing.JEditorPane();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -40,7 +62,7 @@ public class UIcontrol extends javax.swing.JFrame {
         returnButton.setBorder(null);
         returnButton.setBorderPainted(false);
         returnButton.setContentAreaFilled(false);
-        returnButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        returnButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         returnButton.setFocusPainted(false);
         returnButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/return-p.png"))); // NOI18N
         returnButton.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/return-o.png"))); // NOI18N
@@ -50,22 +72,139 @@ public class UIcontrol extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Analisis Pilotos"));
+
+        jLabel1.setText("Piloto:");
+
+        jComboBoxListadoPilotosOperador.setModel(new DefaultComboBoxModel(Almacen.PILOTOS.toArray()));
+        jComboBoxListadoPilotosOperador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListadoPilotosOperadorActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Simulaciones:");
+
+        jComboBoxListadoSimulacionPilotosOperador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListadoSimulacionPilotosOperadorActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxListadoPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxListadoSimulacionPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxListadoPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxListadoSimulacionPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados:"));
+        jPanel3.setToolTipText("");
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setViewportView(jEditorPaneResultadoSimulaciones);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jButton1.setText("boton temporal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton1)))
+                .addContainerGap(312, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(54, 54, 54))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(850, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(returnButton)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(returnButton)
-                .addContainerGap(549, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("Analisis Pilotos");
+        jPanel1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -76,7 +215,77 @@ public class UIcontrol extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_returnButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        /*Quitar es solo para prueba*/
+        Piloto ppp = new Piloto();
+        ppp.setNombre("");
+        Almacen.PILOTOS.add(ppp);
+        Piloto pp = new Piloto();
+        pp.setNombre("Prueba1");
+        Almacen.PILOTOS.add(pp);
+        Piloto p = new Piloto();
+        p.setNombre("Prueba2");
+        Almacen.PILOTOS.add(p);
+        
+        
+        RegistroPruebasSimulacion prueba1 = new RegistroPruebasSimulacion();
+        prueba1.setCalificacionMeteorologica(8);
+        prueba1.setCalificacionOrografica(9);
+        prueba1.setCalificacionVisibilidad(7);
+        prueba1.setFecha(new Date());
+        prueba1.setPiloto(pp);
+        
+        RegistroPruebasSimulacion prueba2 = new RegistroPruebasSimulacion();
+        prueba2.setCalificacionMeteorologica(6);
+        prueba2.setCalificacionOrografica(3);
+        prueba2.setCalificacionVisibilidad(2);
+        prueba2.setFecha(new Date());
+        prueba2.setPiloto(pp);
+        
+        try {
+            prueba1.setEscenario((Escenario)Almacen.escenario1.clone());
+            prueba2.setEscenario((Escenario)Almacen.escenario2.clone());
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(UIcontrol.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        RegistroPruebasSimulacion pruebaSim = new RegistroPruebasSimulacion();
+        
+        Almacen.registroPruebasSimulacion.add(pruebaSim);
+        Almacen.registroPruebasSimulacion.add(prueba1);
+        Almacen.registroPruebasSimulacion.add(prueba2);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxListadoPilotosOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListadoPilotosOperadorActionPerformed
+        System.out.println("Se selecciono uno"+jComboBoxListadoPilotosOperador.getSelectedItem().toString());
+        //Se revisa cual piloto se selecciono y se busca el 
+        jComboBoxListadoSimulacionPilotosOperador.setModel(new DefaultComboBoxModel(Almacen.getSimulacionesPiloto(jComboBoxListadoPilotosOperador.getSelectedItem().toString())));
+
+    }//GEN-LAST:event_jComboBoxListadoPilotosOperadorActionPerformed
+
+    private void jComboBoxListadoSimulacionPilotosOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListadoSimulacionPilotosOperadorActionPerformed
+        if(jComboBoxListadoSimulacionPilotosOperador.getSelectedItem().toString().compareTo("") != 0){
+            String calificacion = Almacen.getCalificacionSimulacion(jComboBoxListadoSimulacionPilotosOperador.getSelectedItem().toString());
+            jEditorPaneResultadoSimulaciones.setContentType("text/html");
+            jEditorPaneResultadoSimulaciones.setText(calificacion);
+        }
+        
+        
+    }//GEN-LAST:event_jComboBoxListadoSimulacionPilotosOperadorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBoxListadoPilotosOperador;
+    private javax.swing.JComboBox<String> jComboBoxListadoSimulacionPilotosOperador;
+    private javax.swing.JEditorPane jEditorPaneResultadoSimulaciones;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton returnButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,7 +16,7 @@ public class Turbulencia extends Meteorologica{
         @Override
     public List<String> getInfo() {
        List<String> respuesta = new ArrayList();
-       respuesta.add("Nombre: "+this.getNombre());
+       respuesta.add("Condicion: "+this.getNombre());
        respuesta.add("Dificultad: "+this.getDificultad());
        respuesta.add("Peso Relativo: "+this.getPesoRelativo());
        

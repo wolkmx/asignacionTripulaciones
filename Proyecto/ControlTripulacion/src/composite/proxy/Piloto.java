@@ -131,5 +131,10 @@ public class Piloto implements PilotoSubject {
     public PilotoSubject obtener() {
         return this;
     }
-
+    
+    @Override
+    public String toString(){
+        return this.nombre+"";
+    }
+    
 }
