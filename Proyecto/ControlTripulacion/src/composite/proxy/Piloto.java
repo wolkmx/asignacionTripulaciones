@@ -131,4 +131,9 @@ private String id="";
         return this;
     }
     
+    @Override
+    public String toString(){
+        return this.nombre+"";
+    }
+    
 }

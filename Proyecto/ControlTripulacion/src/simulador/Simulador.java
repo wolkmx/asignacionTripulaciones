@@ -100,7 +100,7 @@ public class Simulador {
         numero = r.nextInt(superior-inferior) + inferior;
         registro.setCalificacionVisibilidad(numero);
         
-        Almacen.registroPruebasSimulacion.put(piloto.getId(), registro);
+        Almacen.registroPruebasSimulacion.add(registro);
         
     }
     
