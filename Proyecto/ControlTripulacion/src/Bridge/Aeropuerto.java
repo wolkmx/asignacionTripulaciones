@@ -9,7 +9,7 @@ package bridge;
  *
  * @author Ignacio Luna Rodriguez
  */
-public class Aeropuerto {
+public class Aeropuerto implements UsuarioCondiciones{
 
     /**
      * @return the tipoDeAeropuesto
@@ -27,6 +27,12 @@ public class Aeropuerto {
     private int id;
     private String tipoDeAeropuesto;
     private String nombre;
+    private Condiciones condicionTecnica;
+
+    public void setCondicionTecnica(Tecnica condicionTecnica) {
+        this.condicionTecnica = condicionTecnica;
+    }
+    
     public Aeropuerto(){
     }
 
@@ -56,6 +62,26 @@ public class Aeropuerto {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public Condiciones[] getMeteorologica() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Condiciones[] getVisibilidad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Condiciones[] getOrografica() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Condiciones getTecnica() {
+        return this.condicionTecnica;
     }
     
 }

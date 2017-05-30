@@ -18,11 +18,38 @@ private String id="";
     private String nombre;
     private int nEmpleado;
     private Date fechaNacimiento;
+    private int numeroVuelos;
+    private int horasVuelo;
+    private String observaciones;
+
+    public int getNumeroVuelos() {
+        return numeroVuelos;
+    }
+
+    public void setNumeroVuelos(int numeroVuelos) {
+        this.numeroVuelos = numeroVuelos;
+    }
+
+    public int getHorasVuelo() {
+        return horasVuelo;
+    }
+
+    public void setHorasVuelo(int horasVuelo) {
+        this.horasVuelo = horasVuelo;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
     /**
      * @return the nombre
      */
-    @Override
+  
     public String getNombre() {
         return nombre;
     }
@@ -30,7 +57,7 @@ private String id="";
     /**
      * @param nombre the nombre to set
      */
-    @Override
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -38,7 +65,7 @@ private String id="";
     /**
      * @return the nEmpleado
      */
-    @Override
+   
     public int getnEmpleado() {
         return nEmpleado;
     }
@@ -46,7 +73,7 @@ private String id="";
     /**
      * @param nEmpleado the nEmpleado to set
      */
-    @Override
+
     public void setnEmpleado(int nEmpleado) {
         this.nEmpleado = nEmpleado;
     }
@@ -54,7 +81,7 @@ private String id="";
     /**
      * @return the fechaNacimiento
      */
-    @Override
+    
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -62,7 +89,7 @@ private String id="";
     /**
      * @param fechaNacimiento the fechaNacimiento to set
      */
-    @Override
+   
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -70,7 +97,7 @@ private String id="";
     /**
      * @return the id
      */
-    @Override
+  
     public String getId() {
         return id;
     }
@@ -78,7 +105,7 @@ private String id="";
     /**
      * @param id the id to set
      */
-    @Override
+    
     public void setId(String id) {
         this.id = id;
     }
@@ -86,7 +113,7 @@ private String id="";
     /**
      * @return the password
      */
-    @Override
+    
     public String getPassword() {
         return password;
     }
@@ -94,12 +121,12 @@ private String id="";
     /**
      * @param password the password to set
      */
-    @Override
+  
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Override
+  
     public PilotoSubject obtener() {
         return this;
     }
