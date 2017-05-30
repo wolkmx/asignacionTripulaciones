@@ -43,7 +43,15 @@ public class Vuelo implements UsuarioCondiciones{
     public void setAeropuertoSalida(Aeropuerto aeropuertoSalida) {
         this.aeropuertoSalida = aeropuertoSalida;
     }
-    
+    public void addMeteorologica(Condiciones nueva,int posicion){
+        condicionMeteorologica[posicion]=nueva;
+    }
+    public void addVisibilidad(Condiciones nueva,int posicion){
+        condicionVisibilidad[posicion]=nueva;
+    }
+    public void addOrografica(Condiciones nueva,int posicion){
+        condicionMeteorologica[posicion]=nueva;
+    }
     @Override
     public Condiciones[] getMeteorologica(){
         return this.condicionMeteorologica;
