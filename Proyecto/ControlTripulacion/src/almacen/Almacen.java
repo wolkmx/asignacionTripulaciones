@@ -68,12 +68,10 @@ public class Almacen {
     
     public static String getCalificacionSimulacion(String nombreEscenario){
         String respuesta = "";
-        System.out.println(Almacen.registroPruebasSimulacion.size());
         String[] valores = nombreEscenario.split("-");
         
         for(RegistroPruebasSimulacion r: Almacen.registroPruebasSimulacion){
             if(r.getPiloto() != null){
-                System.out.println(r.getPiloto().getNombre());
                 if((r.getPiloto().getNombre().compareTo(valores[0]) == 0) && (r.getEscenario().getNombre().compareTo(valores[1]) == 0) ){
                     respuesta = "Escenario: "+r.getEscenario().getNombre()+"<br/>Calificaicon Meteorologica: "+r.getCalificacionMeteorologica()+"<br/>";
                     respuesta = respuesta + "Calificacion Orografica: "+r.getCalificacionOrografica()+"<br/>";
