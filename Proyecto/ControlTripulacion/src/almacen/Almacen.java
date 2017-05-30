@@ -14,6 +14,7 @@ import bridge.prototype.Escenario3;
 import bridge.prototype.Escenario4;
 import bridge.prototype.Escenario5;
 import bridge.prototype.Escenario6;
+import bridge.Aeropuerto;
 import composite.proxy.Piloto;
 import composite.proxy.PilotoProxy;
 import composite.proxy.PilotoSubject;
@@ -33,7 +34,7 @@ import registro.RegistroVuelos;
 public class Almacen {
     
     public static List<RegistroPruebasSimulacion> registroPruebasSimulacion= new ArrayList<>();
-    
+    public static Map<Integer,Aeropuerto> aeropuertos=new HashMap<Integer,Aeropuerto>();
     public static Escenario escenario1 = new Escenario1();
     public static Escenario escenario2 = new Escenario2();
     public static Escenario escenario3 = new Escenario3();
