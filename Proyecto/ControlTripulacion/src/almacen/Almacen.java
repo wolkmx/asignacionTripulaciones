@@ -5,6 +5,7 @@
  */
 package almacen;
 
+import static almacen.Almacen.PILOTOS;
 import bridge.prototype.Escenario;
 import bridge.prototype.Escenario1;
 import bridge.prototype.Escenario2;

@@ -11,10 +11,22 @@ import java.util.Date;
  *
  * @author Cristian Enríquez
  */
-public class Piloto implements PilotoSubject{
+public class Piloto implements PilotoSubject {
+    
+    public Piloto(){
+    }
+    
+    //Para generar mis pilotos predefinidos en static
+    public Piloto(String nombre, int nEmpleado, int numeroVuelos, int horasVuelo, String observaciones) {
+        this.nombre = nombre;
+        this.nEmpleado = nEmpleado;
+        this.numeroVuelos = numeroVuelos;
+        this.horasVuelo = horasVuelo;
+        this.observaciones = observaciones;
+    }
 
-private String id="";
-    private String password="";
+    private String id = "";
+    private String password = "";
     private String nombre;
     private int nEmpleado;
     private Date fechaNacimiento;
@@ -49,7 +61,6 @@ private String id="";
     /**
      * @return the nombre
      */
-  
     public String getNombre() {
         return nombre;
     }
@@ -57,7 +68,6 @@ private String id="";
     /**
      * @param nombre the nombre to set
      */
-    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -65,7 +75,6 @@ private String id="";
     /**
      * @return the nEmpleado
      */
-   
     public int getnEmpleado() {
         return nEmpleado;
     }
@@ -73,7 +82,6 @@ private String id="";
     /**
      * @param nEmpleado the nEmpleado to set
      */
-
     public void setnEmpleado(int nEmpleado) {
         this.nEmpleado = nEmpleado;
     }
@@ -81,7 +89,6 @@ private String id="";
     /**
      * @return the fechaNacimiento
      */
-    
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -89,7 +96,6 @@ private String id="";
     /**
      * @param fechaNacimiento the fechaNacimiento to set
      */
-   
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -97,7 +103,6 @@ private String id="";
     /**
      * @return the id
      */
-  
     public String getId() {
         return id;
     }
@@ -105,7 +110,6 @@ private String id="";
     /**
      * @param id the id to set
      */
-    
     public void setId(String id) {
         this.id = id;
     }
@@ -113,7 +117,6 @@ private String id="";
     /**
      * @return the password
      */
-    
     public String getPassword() {
         return password;
     }
@@ -121,14 +124,12 @@ private String id="";
     /**
      * @param password the password to set
      */
-  
     public void setPassword(String password) {
         this.password = password;
     }
 
-  
     public PilotoSubject obtener() {
         return this;
     }
-    
+
 }

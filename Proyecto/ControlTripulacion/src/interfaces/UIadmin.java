@@ -5,6 +5,10 @@
  */
 package interfaces;
 
+import static almacen.Almacen.PILOTOS;
+import composite.proxy.Piloto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cristian Enríquez
@@ -85,6 +89,10 @@ public class UIadmin extends javax.swing.JFrame {
         jRadioButton6 = new javax.swing.JRadioButton();
         cancelDVButton = new javax.swing.JButton();
         saveDVButton = new javax.swing.JButton();
+        panelConsultaPiloto = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listadoPilotos = new javax.swing.JTextArea();
+        consultarPilotosButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -147,6 +155,17 @@ public class UIadmin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         jLabel2.setText("No. Empleado:");
 
+        inputNoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNoEmpleadoActionPerformed(evt);
+            }
+        });
+        inputNoEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNoEmpleadoKeyTyped(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         jLabel1.setText("Fecha de Nacimiento: ");
 
@@ -159,6 +178,17 @@ public class UIadmin extends javax.swing.JFrame {
         inputNoVuelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputNoVuelosActionPerformed(evt);
+            }
+        });
+        inputNoVuelos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputNoVuelosKeyTyped(evt);
+            }
+        });
+
+        inputHorasVuelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputHorasVueloKeyTyped(evt);
             }
         });
 
@@ -176,6 +206,11 @@ public class UIadmin extends javax.swing.JFrame {
         saveButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
         saveButton.setText("Guardar");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPilotoLayout = new javax.swing.GroupLayout(panelPiloto);
         panelPiloto.setLayout(panelPilotoLayout);
@@ -488,7 +523,42 @@ public class UIadmin extends javax.swing.JFrame {
 
         card.add(panelVuelo, "card5");
 
+        panelConsultaPiloto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Pilotos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 14))); // NOI18N
+
+        listadoPilotos.setColumns(20);
+        listadoPilotos.setRows(5);
+        jScrollPane2.setViewportView(listadoPilotos);
+
+        javax.swing.GroupLayout panelConsultaPilotoLayout = new javax.swing.GroupLayout(panelConsultaPiloto);
+        panelConsultaPiloto.setLayout(panelConsultaPilotoLayout);
+        panelConsultaPilotoLayout.setHorizontalGroup(
+            panelConsultaPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultaPilotoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelConsultaPilotoLayout.setVerticalGroup(
+            panelConsultaPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultaPilotoLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        card.add(panelConsultaPiloto, "card4");
+
         getContentPane().add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 620, 500));
+
+        consultarPilotosButton.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
+        consultarPilotosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
+        consultarPilotosButton.setText("Consultar Pilotos");
+        consultarPilotosButton.setFocusable(false);
+        consultarPilotosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarPilotosButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(consultarPilotosButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 160, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -501,12 +571,18 @@ public class UIadmin extends javax.swing.JFrame {
 
     private void addPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPilotoActionPerformed
         card.setVisible(true);
-        card.add(panelVuelo);
+        card.removeAll();
+        card.updateUI();
+        card.add(panelPiloto);
     }//GEN-LAST:event_addPilotoActionPerformed
 
     private void addVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVueloActionPerformed
         card.setVisible(true);
-        card.add(panelPiloto);
+        card.removeAll();
+        card.updateUI();
+        card.add(panelVuelo);
+
+
     }//GEN-LAST:event_addVueloActionPerformed
 
     private void inputNoVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoVuelosActionPerformed
@@ -521,12 +597,82 @@ public class UIadmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_siRelampagosActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        Piloto piloto = new Piloto();
+        piloto.setNombre(inputNombre.getText());
+        piloto.setFechaNacimiento(inputFechaNacimiento.getDate());
+        piloto.setnEmpleado(Integer.parseInt(inputNoEmpleado.getText()));
+        piloto.setNumeroVuelos(Integer.parseInt(inputNoVuelos.getText()));
+        piloto.setHorasVuelo(Integer.parseInt(inputHorasVuelo.getText()));
+        piloto.setObservaciones(inputObservaciones.getText());
+        PILOTOS.add(piloto);
+        JOptionPane.showMessageDialog(null, "Se ha agregado el Piloto con éxito");
+        //Codigo a eliminar, es para control interno... ---->
+        System.out.println("Piloto agregado...");
+        for (Piloto piloto1 : PILOTOS) {
+            System.out.println(piloto1.getNombre());
+        }
+        //<--------------------------------------------------
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void consultarPilotosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarPilotosButtonActionPerformed
+        card.setVisible(true);
+        card.removeAll();
+        card.updateUI();
+        card.add(panelConsultaPiloto);
+        //Listar pilotos en pantalla
+        for (Piloto piloto : PILOTOS) {
+            listadoPilotos.append("Nombre: " + piloto.getNombre() + "\n");
+            listadoPilotos.append("Número de empleado: " + piloto.getnEmpleado() + "\n");
+            listadoPilotos.append("Fecha de nacimiento: " + piloto.getFechaNacimiento() + "\n");
+            listadoPilotos.append("Número de vuelos realizados: " + piloto.getNumeroVuelos() + "\n");
+            listadoPilotos.append("Horas de vuelo: " + piloto.getHorasVuelo() + "\n");
+            listadoPilotos.append("- | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |\n");
+        }
+
+    }//GEN-LAST:event_consultarPilotosButtonActionPerformed
+
+    private void inputNoEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNoEmpleadoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puedes ingresar números");
+            inputNoEmpleado.setText(null);
+        }
+    }//GEN-LAST:event_inputNoEmpleadoKeyTyped
+
+    private void inputNoVuelosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNoVuelosKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puedes ingresar números");
+            inputNoVuelos.setText(null);
+        }
+    }//GEN-LAST:event_inputNoVuelosKeyTyped
+
+    private void inputHorasVueloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputHorasVueloKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puedes ingresar números");
+            inputHorasVuelo.setText(null);
+        }
+    }//GEN-LAST:event_inputHorasVueloKeyTyped
+
+    private void inputNoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNoEmpleadoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPiloto;
     private javax.swing.JButton addVuelo;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton cancelDVButton;
     private javax.swing.JPanel card;
+    private javax.swing.JButton consultarPilotosButton;
     private javax.swing.JTextField inputDestino;
     private com.toedter.calendar.JDateChooser inputFechaNacimiento;
     private com.toedter.calendar.JDateChooser inputFechaVuelo;
@@ -560,12 +706,15 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelNombre;
+    private javax.swing.JTextArea listadoPilotos;
     private javax.swing.ButtonGroup lluviaButtonGroup;
     private javax.swing.JSlider luzSolar;
     private javax.swing.ButtonGroup nieblaButtonGroup;
     private javax.swing.JRadioButton noNiebla;
     private javax.swing.JRadioButton noRelampagos;
+    private javax.swing.JPanel panelConsultaPiloto;
     private javax.swing.JPanel panelPiloto;
     private javax.swing.JPanel panelVuelo;
     private javax.swing.ButtonGroup relampagosButtonGroup;
