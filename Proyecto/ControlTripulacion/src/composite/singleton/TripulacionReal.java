@@ -5,6 +5,8 @@
  */
 package composite.singleton;
 
+import almacen.Almacen;
+import composite.proxy.Piloto;
 import java.util.Date;
 
 /**
@@ -21,11 +23,32 @@ public class TripulacionReal extends Tripulacion {
     public TripulacionReal() {
     }
     
-    public static TripulacionReal getTripulacion() {
-        if (tripulacion == null) {
+    public static TripulacionReal getTripulacion(Piloto piloto, Piloto copiloto) {
+        //Aqui hago dos verificaciones la primera si no existe ya una tripulacion con esta combinacion
+        if (!existeTripulacion(piloto, copiloto)) {
             tripulacion = new TripulacionReal();
+        }else{
+            
         }
         return tripulacion;
+    }
+    
+    private static boolean existeTripulacion(Piloto piloto, Piloto copiloto){
+    
+        boolean respuesta = false;
+        
+        for(TripulacionReal t: Almacen.TRIPULACIONES){
+            
+            if( (t.tripulantes[0].getNombre().compareTo(piloto.getNombre()) == 0) &&  (t.tripulantes[1].getNombre().compareTo(copiloto.getNombre()) == 0)){
+                respuesta = true;
+                break;
+            }
+            
+        }
+        
+        
+        return respuesta;
+        
     }
 
     @Override
