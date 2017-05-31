@@ -14,6 +14,7 @@ import bridge.prototype.Escenario4;
 import bridge.prototype.Escenario5;
 import bridge.prototype.Escenario6;
 import bridge.Aeropuerto;
+import bridge.Vuelo;
 import composite.proxy.Piloto;
 import composite.proxy.PilotoProxy;
 import composite.singleton.TripulacionReal;
@@ -116,6 +117,18 @@ public class Almacen {
         return "<html><body style='width:100%;'>"+respuesta+"</body></html>";
     }
     
+    
+    public static RegistroVuelos getVuelo(String numero){
+        RegistroVuelos rv = null;
+        
+        for(Entry<Integer,RegistroVuelos> e: registroVuelos.entrySet()){
+            if(String.valueOf(e.getValue().getVuelo().getNumeroVuelo()).compareTo(numero) == 0){
+                rv = e.getValue();
+            }
+        }
+        
+        return rv;
+    }
     
     /**
      * Metodo publico estatico para obtener un listado de tipo string con todos los numeros de vuelo existentes

@@ -23,12 +23,14 @@ import bridge.Turbulencia;
 import bridge.Viento;
 import bridge.Vuelo;
 import bridge.prototype.Escenario;
+import composite.singleton.TripulacionReal;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.JOptionPane.showMessageDialog;
 import registro.RegistroPruebasSimulacion;
 import registro.RegistroVuelos;
+import template.Usuario;
 
 /**
  *
@@ -173,24 +175,12 @@ public class UIcontrol extends javax.swing.JFrame {
         jPanel4.add(jComboBoxVuelosDisponiblesControlVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Caracteristicas del vuelo"));
+        jPanel5.setMaximumSize(new java.awt.Dimension(234, 182));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setViewportView(jEditorPaneCaracteristicasVuelo);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 18, 223, 164));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tripulación"));
         jPanel6.setMaximumSize(new java.awt.Dimension(220, 2147483647));
@@ -222,6 +212,11 @@ public class UIcontrol extends javax.swing.JFrame {
         jPanel6.add(jLabelNombreCopiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
 
         jButton3.setText("Asignar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -502,6 +497,31 @@ public class UIcontrol extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       //Se revisa que esten seleccionados dos pilotos
+       if(pilotos[0]!= null && pilotos[1] != null){
+           
+           //Se debe verificar si ya existe esta instancia de tripulacion para hacer uso de singleton, si ya existe nos regresa esa instancia, si no existe crea una nueva
+           TripulacionReal tr = TripulacionReal.getTripulacion(pilotos[0], pilotos[1]);
+           //Se verifica si estan en vuelo o no los pilotos
+           Usuario[] u = tr.getTripulacion();
+           if( ((Piloto)u[0]).getVolando() == false && ((Piloto)u[1]).getVolando() == false ){
+               
+               //Se asigna esta tripulacion al vuelo seleccionado
+               RegistroVuelos rv = Almacen.getVuelo(jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString());
+               
+               rv.setTripulacion(tr);
+               showMessageDialog(null, "Se asigno esta tripulacion: "+pilotos[0].getNombre()+" y "+pilotos[1].getNombre()+" al vuelo "+rv.getVuelo().getNumeroVuelo());
+               
+           }else{
+               showMessageDialog(null, "Esta tripulacion aun esta volando");
+           }
+           
+       }else{
+           showMessageDialog(null, "Debe seleccionar un Piloto y un Copiloto");
+       }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * Metodo para verificar la existencia de la tripulacion y por lo tanto hacer uso del singleton
