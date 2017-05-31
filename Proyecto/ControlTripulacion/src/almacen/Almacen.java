@@ -34,7 +34,7 @@ import registro.RegistroVuelos;
 public class Almacen {
     
     public static List<RegistroPruebasSimulacion> registroPruebasSimulacion= new ArrayList<>();
-    public static Map<Integer,Aeropuerto> aeropuertos=new HashMap<Integer,Aeropuerto>();
+    public static List<Aeropuerto> aeropuertos=new ArrayList<>();
     public static Escenario escenario1 = new Escenario1();
     public static Escenario escenario2 = new Escenario2();
     public static Escenario escenario3 = new Escenario3();
