@@ -46,6 +46,7 @@ public class Almacen {
     
     public static List<Piloto> PILOTOS = new ArrayList<>();
     public static List<TripulacionReal> TRIPULACIONES = new ArrayList<>();
+    public static List<Vuelo> VUELOS = new ArrayList<>();
     
     public static PilotoProxy getPilotoDisponible(String nombre){
         PilotoProxy piloto= new PilotoProxy(nombre);
