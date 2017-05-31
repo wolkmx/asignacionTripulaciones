@@ -5,6 +5,7 @@
  */
 package composite.proxy;
 
+import static almacen.Almacen.PILOTOS;
 import composite.singleton.Tripulacion;
 import java.util.Date;
 //XXX
@@ -19,6 +20,19 @@ public class PilotoProxy extends Tripulacion implements PilotoSubject{
     public PilotoProxy(){
     piloto = new Piloto();
     estado = true;
+    }
+    
+    public PilotoProxy(String nombre){
+        
+        estado = false;
+        for(Piloto p: PILOTOS){
+            piloto = p;
+            if(p.getNombre().compareTo(nombre) == 0 && p.getVolando()){
+                estado = true;
+                break;
+            }
+        }
+    
     }
     
     public void setPassword(String password){
@@ -71,9 +85,9 @@ public class PilotoProxy extends Tripulacion implements PilotoSubject{
     }
 
     @Override
-    public PilotoSubject obtener() {
-        if(this.estado){
-            return this.piloto.obtener();
+    public Piloto obtener() {
+        if(!this.estado){
+            return (Piloto) this.piloto;
         }else{
             return null;
         }

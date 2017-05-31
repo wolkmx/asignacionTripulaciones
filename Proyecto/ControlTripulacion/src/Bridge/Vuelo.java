@@ -63,6 +63,16 @@ public class Vuelo implements UsuarioCondiciones{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void addMeteorologica(Condiciones nueva, int posicion){
+        condicionMeteorologica[posicion] = nueva;
+    }
     
+    public void addVisibilidad(Condiciones nueva, int posicion){
+        condicionVisibilidad[posicion] = nueva;
+    }
+    
+    public void addOrografica(Condiciones nueva, int posicion){
+        condicionOrografica[posicion] = nueva;
+    }
     
 }
