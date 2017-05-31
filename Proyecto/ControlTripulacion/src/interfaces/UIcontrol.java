@@ -439,7 +439,9 @@ public class UIcontrol extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxListadoSimulacionPilotosOperadorActionPerformed
 
     private void jComboBoxVuelosDisponiblesControlVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxVuelosDisponiblesControlVueloActionPerformed
+        //System.out.println("----->"+jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString());
         String caracteristicas = Almacen.getCaracteristicasVuelo(jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString());
+        
         jEditorPaneCaracteristicasVuelo.setContentType("text/html");
         jEditorPaneCaracteristicasVuelo.setText(caracteristicas);
         

@@ -86,6 +86,7 @@ public class Almacen {
     }
     /**
      * Metodo public estatico para obtener las caracteristicas de los vueolos
+     * @param nVuelo
      */
     
     public static String getCaracteristicasVuelo(String nVuelo){
@@ -170,7 +171,6 @@ public class Almacen {
     
     public static String obtenerDatosCondiciones(Condiciones[] condiciones){
         String respuesta = "";
-        
         for(Condiciones c: condiciones){
             respuesta = respuesta + "Tipo: "+c.getClass().getSimpleName()+"<br/>";
             for(String x : c.getInfo()){

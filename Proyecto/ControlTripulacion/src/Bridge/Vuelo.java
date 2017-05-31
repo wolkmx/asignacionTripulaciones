@@ -50,7 +50,7 @@ public class Vuelo implements UsuarioCondiciones{
         condicionVisibilidad[posicion]=nueva;
     }
     public void addOrografica(Condiciones nueva,int posicion){
-        condicionMeteorologica[posicion]=nueva;
+        condicionOrografica[posicion]=nueva;
     }
     @Override
     public Condiciones[] getMeteorologica(){
