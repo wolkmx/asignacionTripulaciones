@@ -6,14 +6,15 @@
 package builder;
 
 import bridge.Aeropuerto;
+import bridge.Tecnica;
 
 /**
  *
  * @author martina24
  */
-public class AeropuertoConstructorConcreto implements IConstructor{
+public class ConstructorAeropuerto implements Constructor{
     Aeropuerto aeropuesto;
-    public AeropuertoConstructorConcreto(){
+    public ConstructorAeropuerto(){
         this.aeropuesto=new Aeropuerto();
     }
     @Override
@@ -27,10 +28,14 @@ public class AeropuertoConstructorConcreto implements IConstructor{
     @Override
     public void id(int id){
         this.aeropuesto.setId(id);
-    }    
+    }
+    public void setCondicionTecnica(Tecnica tecnica){
+        this.aeropuesto.setCondicionTecnica(tecnica);
+    }
     @Override
     public Aeropuerto getAeropuerto(){
         return this.aeropuesto;
     }
+    
     
 }

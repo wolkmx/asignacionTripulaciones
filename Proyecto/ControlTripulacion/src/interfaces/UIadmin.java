@@ -11,10 +11,13 @@ import static almacen.Almacen.registroVuelos;
 import composite.proxy.Piloto;
 import javax.swing.JOptionPane;
 import bridge.*;
+import builder.ConstructorAeropuerto;
+import builder.DirectorAeropuertos;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.BiConsumer;
 import registro.RegistroVuelos;
+import builder.Constructor;
 /**
  *
  * @author Cristian Enríquez
@@ -31,6 +34,48 @@ public class UIadmin extends javax.swing.JFrame {
     Ciudad ciudad;
     Canion canion;   
     Random random;
+    {
+        Constructor constructor=new ConstructorAeropuerto();
+        DirectorAeropuertos director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(1, "Atlanta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());        
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(2, "Pekin", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(3, "Londres", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(4, "Tokio", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(5, "Chicago", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(6, "Los Angeles", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(7, "Dallas", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(8, "Yakarta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(9, "Dubai", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(10, "Ciudad de Mexico", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+    }
     /**
      * Creates new form UIadmin
      */
@@ -50,8 +95,8 @@ public class UIadmin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         card.setVisible(false);
         panelPiloto.setVisible(false);
-        panelVuelo.setVisible(false);
-        
+        panelVuelo.setVisible(false);        
+               
         for(int i=0;i<aeropuertos.size();i++){
             origen.addItem(aeropuertos.get(i).getNombre());
         }
@@ -1067,16 +1112,16 @@ public class UIadmin extends javax.swing.JFrame {
         luz.setPesoRelativo(luzSolar.getValue());
         vuelo.addVisibilidad(luz,0);
         String mensaje="";
-        mensaje+=(niebla==null)?"\nDebes selecionar la niebla":"";
-        mensaje+=(relampagos==null)?"\nDebes selecionar la relampagos":"";
+        mensaje+=(niebla==null)?"\nFalta selecionar si hay niebla":"";
+        mensaje+=(relampagos==null)?"\nFalta selecionar si hay relampagos":"";
         //mensaje+=(luz==null)?"\nDebes selecionar la luz":"";
-        mensaje+=(lluvia==null)?"\nDebes selecionar la lluvia":"";
-        mensaje+=(viento==null)?"\nDebes selecionar la viento":"";
-        mensaje+=(turbulencia==null)?"\nDebes selecionar la turbulencia":"";
-        mensaje+=(montania==null)?"\nDebes selecionar la montania":"";
-        mensaje+=(ciudad==null)?"\nDebes selecionar la montania":"";
-        mensaje+=(canion==null)?"\nDebes selecionar el cañon":"";
-        mensaje+=(inputFechaVuelo.getDate()==null)?"\nDebes selecionar una fecha":"";
+        mensaje+=(lluvia==null)?"\nFalta selecionar si hay lluvia":"";
+        mensaje+=(viento==null)?"\nFalta selecionar si hay viento":"";
+        mensaje+=(turbulencia==null)?"\nFalta selecionar si hay turbulencia":"";
+        mensaje+=(montania==null)?"\nFalta selecionar si hay montañas":"";
+        mensaje+=(ciudad==null)?"\nFalta selecionar si hay ciudad":"";
+        mensaje+=(canion==null)?"\nFalta selecionar si hay cañones":"";
+        mensaje+=(inputFechaVuelo.getDate()==null)?"\nFalta selecionar la fecha":"";
         if(mensaje.equals("")){      
             RegistroVuelos registro=new RegistroVuelos();
             registro.setVuelo(vuelo);

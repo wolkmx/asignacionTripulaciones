@@ -16,7 +16,10 @@ public class Tecnica implements CondicionesPermanentes{
     
     private int numeroPistas;
     private int capacidaPasajeros;
-    
+    public Tecnica(int numeroPistas, int capacidaPasajeros){
+        this.numeroPistas=numeroPistas;
+        this.capacidaPasajeros=capacidaPasajeros;
+    }
     public void setNumeroPistas(int numeroPistas){
         this.numeroPistas = numeroPistas;
     }

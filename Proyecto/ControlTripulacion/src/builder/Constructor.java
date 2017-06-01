@@ -6,14 +6,16 @@
 package builder;
 
 import bridge.Aeropuerto;
+import bridge.Tecnica;
 
 /**
  *
  * @author Cristian Enríquez
  */
-public interface IConstructor {
+public interface Constructor {
     public void tipoDeAeropuerto(String tipo);
     public void nombreAerolinea(String nombre);
     public void id(int id);
+    public void setCondicionTecnica(Tecnica tecnica);
     public Aeropuerto getAeropuerto();
 }
