@@ -6,24 +6,58 @@
 package interfaces;
 
 import static almacen.Almacen.PILOTOS;
+import static almacen.Almacen.aeropuertos;
+import static almacen.Almacen.registroVuelos;
 import composite.proxy.Piloto;
 import javax.swing.JOptionPane;
-
+import bridge.*;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.BiConsumer;
+import registro.RegistroVuelos;
 /**
  *
  * @author Cristian Enríquez
  */
 public class UIadmin extends javax.swing.JFrame {
-
+    Vuelo vuelo;
+    Niebla niebla;
+    Relampagos relampagos;
+    LuzSolar luz;
+    Turbulencia turbulencia;
+    Viento viento;
+    Lluvia lluvia;
+    Montania montania;
+    Ciudad ciudad;
+    Canion canion;   
+    Random random;
     /**
      * Creates new form UIadmin
      */
     public UIadmin() {
         initComponents();
+        random=new Random();
+        vuelo=new Vuelo();
+        niebla=null;
+        relampagos=null;
+        luz=null;
+        turbulencia=null;
+        viento=null;
+        lluvia=null;
+        montania=null;
+        ciudad=null;
+        canion=null;
         this.setLocationRelativeTo(null);
         card.setVisible(false);
         panelPiloto.setVisible(false);
         panelVuelo.setVisible(false);
+        
+        for(int i=0;i<aeropuertos.size();i++){
+            origen.addItem(aeropuertos.get(i).getNombre());
+        }
+        for(int i=0;i<aeropuertos.size();i++){
+            destino.addItem(aeropuertos.get(i).getNombre());
+        }
     }
 
     /**
@@ -63,8 +97,6 @@ public class UIadmin extends javax.swing.JFrame {
         panelVuelo = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        inputOrigen = new javax.swing.JTextField();
-        inputDestino = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         inputFechaVuelo = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
@@ -81,23 +113,33 @@ public class UIadmin extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        siLluvia = new javax.swing.JRadioButton();
+        noLluvia = new javax.swing.JRadioButton();
+        siViento = new javax.swing.JRadioButton();
+        noViento = new javax.swing.JRadioButton();
+        siTurbulencia = new javax.swing.JRadioButton();
+        noTurbulencia = new javax.swing.JRadioButton();
         cancelDVButton = new javax.swing.JButton();
         saveDVButton = new javax.swing.JButton();
+        origen = new javax.swing.JComboBox<>();
+        destino = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        siMontana = new javax.swing.JRadioButton();
+        noMontana = new javax.swing.JRadioButton();
+        jLabel16 = new javax.swing.JLabel();
+        siCiudad = new javax.swing.JRadioButton();
+        noCiudad = new javax.swing.JRadioButton();
+        siCanon = new javax.swing.JRadioButton();
+        noCanon = new javax.swing.JRadioButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         panelConsultaPiloto = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listadoPilotos = new javax.swing.JTextArea();
         consultarPilotosButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 600));
         setMinimumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,6 +193,12 @@ public class UIadmin extends javax.swing.JFrame {
 
         labelNombre.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         labelNombre.setText("Nombre: ");
+
+        inputNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNombreActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         jLabel2.setText("No. Empleado:");
@@ -278,7 +326,7 @@ public class UIadmin extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(panelPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
@@ -320,6 +368,11 @@ public class UIadmin extends javax.swing.JFrame {
 
         nieblaButtonGroup.add(noNiebla);
         noNiebla.setText("No");
+        noNiebla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noNieblaActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         jLabel11.setText("Relampagos");
@@ -334,6 +387,11 @@ public class UIadmin extends javax.swing.JFrame {
 
         relampagosButtonGroup.add(noRelampagos);
         noRelampagos.setText("No");
+        noRelampagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noRelampagosActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         jLabel12.setText("Cantidad de Luz Solar");
@@ -400,45 +458,75 @@ public class UIadmin extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
         jLabel15.setText("Turbulencia");
 
-        lluviaButtonGroup.add(jRadioButton1);
-        jRadioButton1.setText("Si");
+        lluviaButtonGroup.add(siLluvia);
+        siLluvia.setText("Si");
+        siLluvia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siLluviaActionPerformed(evt);
+            }
+        });
 
-        lluviaButtonGroup.add(jRadioButton2);
-        jRadioButton2.setText("No");
+        lluviaButtonGroup.add(noLluvia);
+        noLluvia.setText("No");
+        noLluvia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noLluviaActionPerformed(evt);
+            }
+        });
 
-        vientoButtonGroup.add(jRadioButton3);
-        jRadioButton3.setText("Si");
+        vientoButtonGroup.add(siViento);
+        siViento.setText("Si");
+        siViento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siVientoActionPerformed(evt);
+            }
+        });
 
-        vientoButtonGroup.add(jRadioButton4);
-        jRadioButton4.setText("No");
+        vientoButtonGroup.add(noViento);
+        noViento.setText("No");
+        noViento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noVientoActionPerformed(evt);
+            }
+        });
 
-        turbulenciaButtonGroup.add(jRadioButton5);
-        jRadioButton5.setText("Si");
+        turbulenciaButtonGroup.add(siTurbulencia);
+        siTurbulencia.setText("Si");
+        siTurbulencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siTurbulenciaActionPerformed(evt);
+            }
+        });
 
-        turbulenciaButtonGroup.add(jRadioButton6);
-        jRadioButton6.setText("No");
+        turbulenciaButtonGroup.add(noTurbulencia);
+        noTurbulencia.setText("No");
+        noTurbulencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noTurbulenciaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(75, 75, 75)
+                    .addComponent(siLluvia)
+                    .addComponent(noLluvia))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
-                .addGap(101, 101, 101)
+                    .addComponent(siViento)
+                    .addComponent(noViento))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jRadioButton5)
+                    .addComponent(noTurbulencia)
+                    .addComponent(siTurbulencia)
                     .addComponent(jLabel15))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,24 +537,144 @@ public class UIadmin extends javax.swing.JFrame {
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton5))
+                    .addComponent(siLluvia)
+                    .addComponent(siViento)
+                    .addComponent(siTurbulencia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton6))
-                .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(noLluvia)
+                    .addComponent(noViento)
+                    .addComponent(noTurbulencia))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         cancelDVButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         cancelDVButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancel.png"))); // NOI18N
         cancelDVButton.setText("Cancelar");
+        cancelDVButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDVButtonActionPerformed(evt);
+            }
+        });
 
         saveDVButton.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         saveDVButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
         saveDVButton.setText("Guardar");
+        saveDVButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveDVButtonActionPerformed(evt);
+            }
+        });
+
+        origen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                origenActionPerformed(evt);
+            }
+        });
+
+        destino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destinoActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Orográfica", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 18))); // NOI18N
+
+        siMontana.setText("Si");
+        siMontana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siMontanaActionPerformed(evt);
+            }
+        });
+
+        noMontana.setText("No");
+        noMontana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noMontanaActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("HP Simplified Light", 0, 14)); // NOI18N
+        jLabel16.setText("Motaña");
+
+        siCiudad.setText("Si");
+        siCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siCiudadActionPerformed(evt);
+            }
+        });
+
+        noCiudad.setText("No");
+        noCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noCiudadActionPerformed(evt);
+            }
+        });
+
+        siCanon.setText("Si");
+        siCanon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siCanonActionPerformed(evt);
+            }
+        });
+
+        noCanon.setText("No");
+        noCanon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noCanonActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Ciudad");
+
+        jLabel18.setText("Cañon");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(siMontana)
+                    .addComponent(noMontana)
+                    .addComponent(jLabel16))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(siCiudad)
+                            .addComponent(noCiudad))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(noCanon)
+                            .addComponent(siCanon)))
+                    .addComponent(jLabel17)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(6, 6, 6)))
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(siMontana)
+                    .addComponent(siCiudad)
+                    .addComponent(siCanon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(noMontana)
+                    .addComponent(noCiudad)
+                    .addComponent(noCanon))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelVueloLayout = new javax.swing.GroupLayout(panelVuelo);
         panelVuelo.setLayout(panelVueloLayout);
@@ -480,23 +688,26 @@ public class UIadmin extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVueloLayout.createSequentialGroup()
                         .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelVueloLayout.createSequentialGroup()
+                                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                    .addComponent(inputFechaVuelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(origen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelVueloLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(cancelDVButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(saveDVButton))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelVueloLayout.createSequentialGroup()
-                                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                                    .addComponent(inputFechaVuelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(inputOrigen, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))))
         );
         panelVueloLayout.setVerticalGroup(
@@ -508,8 +719,8 @@ public class UIadmin extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -518,13 +729,22 @@ public class UIadmin extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelDVButton)
-                    .addComponent(saveDVButton)))
+                .addGap(20, 20, 20)
+                .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelVueloLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cancelDVButton)
+                            .addComponent(saveDVButton)))
+                    .addGroup(panelVueloLayout.createSequentialGroup()
+                        .addGroup(panelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 61, Short.MAX_VALUE))))
         );
+
+        inputFechaVuelo.getAccessibleContext().setAccessibleName("");
+        jPanel3.getAccessibleContext().setAccessibleName("Orografica");
 
         card.add(panelVuelo, "card5");
 
@@ -546,7 +766,7 @@ public class UIadmin extends javax.swing.JFrame {
         panelConsultaPilotoLayout.setVerticalGroup(
             panelConsultaPilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultaPilotoLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -582,12 +802,15 @@ public class UIadmin extends javax.swing.JFrame {
     }//GEN-LAST:event_addPilotoActionPerformed
 
     private void addVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVueloActionPerformed
+        if(aeropuertos.size()<1){
+            JOptionPane.showMessageDialog(null,"no existen aeropuertos cargados");            
+        }
+        else{
         card.setVisible(true);
         card.removeAll();
         card.updateUI();
         card.add(panelVuelo);
-
-
+        }
     }//GEN-LAST:event_addVueloActionPerformed
 
     private void inputNoVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNoVuelosActionPerformed
@@ -595,11 +818,20 @@ public class UIadmin extends javax.swing.JFrame {
     }//GEN-LAST:event_inputNoVuelosActionPerformed
 
     private void siNieblaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siNieblaActionPerformed
-        // TODO add your handling code here:
+        niebla=new Niebla();
+        niebla.setDificultad(random.nextInt(10) + 1);
+        niebla.setNombre("Hay Niebla");
+        niebla.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addVisibilidad(niebla,2);
+        
     }//GEN-LAST:event_siNieblaActionPerformed
 
     private void siRelampagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siRelampagosActionPerformed
-        // TODO add your handling code here:
+        relampagos=new Relampagos();
+        relampagos.setDificultad(random.nextInt(10) + 1);
+        relampagos.setNombre("Hay relampagos");
+        relampagos.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addVisibilidad(relampagos,1);        
     }//GEN-LAST:event_siRelampagosActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -680,6 +912,199 @@ public class UIadmin extends javax.swing.JFrame {
         inputObservaciones.setText(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNombreActionPerformed
+
+    private void origenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_origenActionPerformed
+        for (int i=0;i<aeropuertos.size();i++) {
+            if((aeropuertos.get(i)).getNombre().equals(this.origen.getSelectedItem())){
+                vuelo.setAeropuertoEntrada(aeropuertos.get(i));
+                break;                
+            }
+        }
+        destino.removeAllItems();
+        for(int i=0;i<aeropuertos.size();i++){
+            if(!((aeropuertos.get(i)).getNombre().equals(this.origen.getSelectedItem()))){
+                destino.addItem(aeropuertos.get(i).getNombre());
+            }
+        }
+    }//GEN-LAST:event_origenActionPerformed
+    
+    
+    private void destinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinoActionPerformed
+        for (int i=0;i<aeropuertos.size();i++) {
+            if((aeropuertos.get(i).getNombre()).equals(destino.getSelectedItem())){
+                vuelo.setAeropuertoEntrada(aeropuertos.get(i));
+                break;
+            }
+        }
+    }//GEN-LAST:event_destinoActionPerformed
+
+    private void cancelDVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDVButtonActionPerformed
+       UIadmin interfazAdmin = new UIadmin();
+        interfazAdmin.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cancelDVButtonActionPerformed
+
+    private void noNieblaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNieblaActionPerformed
+        niebla=new Niebla();
+        niebla.setDificultad(0);
+        niebla.setNombre("No hay niebla");
+        niebla.setPesoRelativo(0f);
+        vuelo.addVisibilidad(niebla,2);
+    }//GEN-LAST:event_noNieblaActionPerformed
+
+    private void siLluviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siLluviaActionPerformed
+        lluvia=new Lluvia();
+        lluvia.setDificultad(random.nextInt(10)+1);
+        lluvia.setNombre("Hay lluvia");
+        lluvia.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addMeteorologica(lluvia,0);
+    }//GEN-LAST:event_siLluviaActionPerformed
+
+    private void noLluviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noLluviaActionPerformed
+        lluvia=new Lluvia();
+        lluvia.setDificultad(0);
+        lluvia.setNombre("No hay Lluvia");
+        lluvia.setPesoRelativo(0f);
+        vuelo.addMeteorologica(lluvia,0);
+    }//GEN-LAST:event_noLluviaActionPerformed
+
+    private void siVientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siVientoActionPerformed
+        viento=new Viento();
+        viento.setDificultad(random.nextInt(10)+1);
+        viento.setNombre("Hay viento");
+        viento.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addMeteorologica(viento,1);
+    }//GEN-LAST:event_siVientoActionPerformed
+
+    private void noVientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noVientoActionPerformed
+        viento=new Viento();
+        viento.setDificultad(0);
+        viento.setNombre("No hay viento");
+        viento.setPesoRelativo(0f);
+        vuelo.addMeteorologica(viento,1);
+    }//GEN-LAST:event_noVientoActionPerformed
+
+    private void noRelampagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noRelampagosActionPerformed
+        relampagos=new Relampagos();
+        relampagos.setDificultad(0);
+        relampagos.setNombre("No hay relampagos");
+        relampagos.setPesoRelativo(0f);
+        vuelo.addVisibilidad(relampagos,1);
+    }//GEN-LAST:event_noRelampagosActionPerformed
+
+    private void siTurbulenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siTurbulenciaActionPerformed
+        turbulencia=new Turbulencia();
+        turbulencia.setDificultad(random.nextInt(10)+1);
+        turbulencia.setNombre("Hay turbulencia");
+        turbulencia.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addMeteorologica(turbulencia,2);
+    }//GEN-LAST:event_siTurbulenciaActionPerformed
+
+    private void noTurbulenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noTurbulenciaActionPerformed
+        turbulencia=new Turbulencia();
+        turbulencia.setDificultad(0);
+        turbulencia.setNombre("No hay Turbulencia");
+        turbulencia.setPesoRelativo(0);
+        vuelo.addMeteorologica(turbulencia,2);
+    }//GEN-LAST:event_noTurbulenciaActionPerformed
+
+    private void siMontanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siMontanaActionPerformed
+        montania=new Montania();
+        montania.setDificultad(random.nextInt(10)+1);
+        montania.setNombre("Hay Motañas");
+        montania.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addOrografica(montania,0);
+    }//GEN-LAST:event_siMontanaActionPerformed
+
+    private void noMontanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noMontanaActionPerformed
+        montania=new Montania();
+        montania.setDificultad(0);
+        montania.setNombre("No hay motañas");
+        montania.setPesoRelativo(0);
+        vuelo.addOrografica(montania,0);
+    }//GEN-LAST:event_noMontanaActionPerformed
+
+    private void siCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siCiudadActionPerformed
+        ciudad=new Ciudad();
+        ciudad.setDificultad(random.nextInt(10)+1);
+        ciudad.setNombre("Hay Ciudades");
+        ciudad.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addOrografica(ciudad,1);
+    }//GEN-LAST:event_siCiudadActionPerformed
+
+    private void noCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noCiudadActionPerformed
+        ciudad=new Ciudad();
+        ciudad.setDificultad(0);
+        ciudad.setNombre("No hay ciudades");
+        ciudad.setPesoRelativo(0);
+        vuelo.addOrografica(ciudad,1);
+    }//GEN-LAST:event_noCiudadActionPerformed
+
+    private void siCanonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siCanonActionPerformed
+        canion=new Canion();
+        canion.setDificultad(random.nextInt(10)+1);
+        canion.setNombre("Hay cañones");
+        canion.setPesoRelativo(random.nextFloat()*(1*100) + 1);
+        vuelo.addOrografica(canion,2);
+    }//GEN-LAST:event_siCanonActionPerformed
+
+    private void noCanonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noCanonActionPerformed
+        canion=new Canion();
+        canion.setDificultad(0);
+        canion.setNombre("No hay cañones");
+        canion.setPesoRelativo(0);
+        vuelo.addOrografica(canion,2);
+    }//GEN-LAST:event_noCanonActionPerformed
+
+    private void saveDVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDVButtonActionPerformed
+        int i=0;
+        luz=new LuzSolar();
+        luz.setDificultad(luzSolar.getValue());
+        luz.setNombre("Luz");
+        luz.setPesoRelativo(luzSolar.getValue());
+        vuelo.addVisibilidad(luz,0);
+        String mensaje="";
+        mensaje+=(niebla==null)?"\nDebes selecionar la niebla":"";
+        mensaje+=(relampagos==null)?"\nDebes selecionar la relampagos":"";
+        //mensaje+=(luz==null)?"\nDebes selecionar la luz":"";
+        mensaje+=(lluvia==null)?"\nDebes selecionar la lluvia":"";
+        mensaje+=(viento==null)?"\nDebes selecionar la viento":"";
+        mensaje+=(turbulencia==null)?"\nDebes selecionar la turbulencia":"";
+        mensaje+=(montania==null)?"\nDebes selecionar la montania":"";
+        mensaje+=(ciudad==null)?"\nDebes selecionar la montania":"";
+        mensaje+=(canion==null)?"\nDebes selecionar el cañon":"";
+        mensaje+=(inputFechaVuelo.getDate()==null)?"\nDebes selecionar una fecha":"";
+        if(mensaje.equals("")){      
+            RegistroVuelos registro=new RegistroVuelos();
+            registro.setVuelo(vuelo);
+            registroVuelos.put(registroVuelos.size(), registro);  
+            mensaje+="Registro: "+(registroVuelos.size()-1);
+            mensaje+=niebla.getNombre()+"\n";
+            mensaje+=relampagos.getNombre()+"\n";
+            mensaje+=luz.getNombre()+"\n";
+            mensaje+=lluvia.getNombre()+"\n";
+            mensaje+=viento.getNombre()+"\n";
+            mensaje+=turbulencia.getNombre()+"\n";
+            mensaje+=montania.getNombre()+"\n";
+            mensaje+=ciudad.getNombre()+"\n";
+            mensaje+=canion.getNombre()+"\n";
+            mensaje+=inputFechaVuelo.getName()+"\n";
+            JOptionPane.showMessageDialog(null, "Tu vuelo a sigo guardado con exito\n"+mensaje);
+            vuelo=new Vuelo();
+            UIadmin interfazAdmin = new UIadmin();
+            interfazAdmin.setVisible(true);
+            dispose();
+            }
+        else{
+            JOptionPane.showMessageDialog(null,mensaje);
+        }
+        
+        
+    }//GEN-LAST:event_saveDVButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPiloto;
     private javax.swing.JButton addVuelo;
@@ -687,7 +1112,7 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.JButton cancelDVButton;
     private javax.swing.JPanel card;
     private javax.swing.JButton consultarPilotosButton;
-    private javax.swing.JTextField inputDestino;
+    private javax.swing.JComboBox<String> destino;
     private com.toedter.calendar.JDateChooser inputFechaNacimiento;
     private com.toedter.calendar.JDateChooser inputFechaVuelo;
     private javax.swing.JTextField inputHorasVuelo;
@@ -695,7 +1120,6 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.JTextField inputNoVuelos;
     private javax.swing.JTextField inputNombre;
     private javax.swing.JTextArea inputObservaciones;
-    private javax.swing.JTextField inputOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -703,6 +1127,9 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -713,12 +1140,7 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelNombre;
@@ -726,8 +1148,15 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.ButtonGroup lluviaButtonGroup;
     private javax.swing.JSlider luzSolar;
     private javax.swing.ButtonGroup nieblaButtonGroup;
+    private javax.swing.JRadioButton noCanon;
+    private javax.swing.JRadioButton noCiudad;
+    private javax.swing.JRadioButton noLluvia;
+    private javax.swing.JRadioButton noMontana;
     private javax.swing.JRadioButton noNiebla;
     private javax.swing.JRadioButton noRelampagos;
+    private javax.swing.JRadioButton noTurbulencia;
+    private javax.swing.JRadioButton noViento;
+    private javax.swing.JComboBox<String> origen;
     private javax.swing.JPanel panelConsultaPiloto;
     private javax.swing.JPanel panelPiloto;
     private javax.swing.JPanel panelVuelo;
@@ -735,8 +1164,14 @@ public class UIadmin extends javax.swing.JFrame {
     private javax.swing.JButton returnButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton saveDVButton;
+    private javax.swing.JRadioButton siCanon;
+    private javax.swing.JRadioButton siCiudad;
+    private javax.swing.JRadioButton siLluvia;
+    private javax.swing.JRadioButton siMontana;
     private javax.swing.JRadioButton siNiebla;
     private javax.swing.JRadioButton siRelampagos;
+    private javax.swing.JRadioButton siTurbulencia;
+    private javax.swing.JRadioButton siViento;
     private javax.swing.ButtonGroup turbulenciaButtonGroup;
     private javax.swing.ButtonGroup vientoButtonGroup;
     // End of variables declaration//GEN-END:variables
