@@ -8,6 +8,7 @@ package main;
 import almacen.Almacen;
 import static almacen.Almacen.PILOTOS;
 import static almacen.Almacen.VUELOS;
+import static almacen.Almacen.aeropuertos;
 import static almacen.Almacen.registroVuelos;
 import bridge.Aeropuerto;
 import bridge.Canion;
@@ -17,13 +18,16 @@ import bridge.LuzSolar;
 import bridge.Montania;
 import bridge.Niebla;
 import bridge.Relampagos;
+import bridge.Tecnica;
 import bridge.Turbulencia;
 import bridge.Viento;
 import bridge.Vuelo;
+import builder.*;
 import composite.proxy.Piloto;
 import composite.singleton.Tripulacion;
 import composite.singleton.TripulacionReal;
 import interfaces.SeleccionarUsuario;
+import java.util.Random;
 import registro.RegistroVuelos;
 
 /**
@@ -39,6 +43,49 @@ public class ControlTripulacion {
         PILOTOS.add(new Piloto("Jen Deo", 003, 30, 360, "Piloto de prueba"));
         PILOTOS.add(new Piloto("Jin Dio", 004, 40, 260, "Piloto de prueba"));
         PILOTOS.add(new Piloto("Jun Duo", 005, 50, 160, "Piloto de prueba"));
+    }
+    public static void aeropuertos(){
+        Random random=new Random();
+        Constructor constructor=new ConstructorAeropuerto();
+        DirectorAeropuertos director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(1, "Atlanta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());        
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(2, "Pekin", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(3, "Londres", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(4, "Tokio", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(5, "Chicago", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(6, "Los Angeles", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(7, "Dallas", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(8, "Yakarta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(9, "Dubai", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
+        constructor=new ConstructorAeropuerto();
+        director=new DirectorAeropuertos(constructor);
+        director.constructAeropuerto(10, "Ciudad de Mexico", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
+        aeropuertos.add(director.getAeropuerto());
     }
 
     /*
@@ -148,6 +195,8 @@ public class ControlTripulacion {
     public static void main(String[] args) {
         //Llenamos pilotos de prueba
         pilotos();
+        //Llenamos aeropuertos
+        aeropuertos();
         //Vuelo de prueba
         asignaTripulacionAVuelo();
         

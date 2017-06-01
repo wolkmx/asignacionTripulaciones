@@ -54,46 +54,7 @@ public class UIadmin extends javax.swing.JFrame {
         card.setVisible(false);
         panelPiloto.setVisible(false);
         panelVuelo.setVisible(false);        
-               Constructor constructor=new ConstructorAeropuerto();
-        DirectorAeropuertos director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(1, "Atlanta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());        
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(2, "Pekin", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(3, "Londres", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(4, "Tokio", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(5, "Chicago", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(6, "Los Angeles", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(7, "Dallas", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(8, "Yakarta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(9, "Dubai", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
-        constructor=new ConstructorAeropuerto();
-        director=new DirectorAeropuertos(constructor);
-        director.constructAeropuerto(10, "Ciudad de Mexico", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
-        aeropuertos.add(director.getAeropuerto());
+        
         for(int i=0;i<aeropuertos.size();i++){
             origen.addItem(aeropuertos.get(i).getNombre());
         }
