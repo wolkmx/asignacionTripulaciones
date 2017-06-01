@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class UIPilots extends javax.swing.JFrame {
 
-    public static int nPiloto;
+    public static int npiloto;
 
     private void listaVuelos() {
         String listado = "";
@@ -214,7 +214,7 @@ public class UIPilots extends javax.swing.JFrame {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void consultarVuelosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarVuelosButtonActionPerformed
-        nPiloto = Integer.parseInt(inputPiloto.getText());
+        npiloto = Integer.parseInt(inputPiloto.getText());
         listVuelos.setText(getVuelosPiloto(inputPiloto.getText()));
     }//GEN-LAST:event_consultarVuelosButtonActionPerformed
 
@@ -233,9 +233,9 @@ public class UIPilots extends javax.swing.JFrame {
         }
         try {
             boolean b = false;
-            nPiloto = Integer.parseInt(inputPiloto.getText());
+            npiloto = Integer.parseInt(inputPiloto.getText());
             for (Piloto p : PILOTOS) {
-                if (nPiloto == p.getnEmpleado()) {
+                if (npiloto == p.getnEmpleado()) {
                     b = true;
                     UISimulacion uisi = new UISimulacion();
                     uisi.setVisible(true);

@@ -47,7 +47,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         adminButton.setBorder(null);
         adminButton.setBorderPainted(false);
         adminButton.setContentAreaFilled(false);
-        adminButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        adminButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         adminButton.setFocusPainted(false);
         adminButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         adminButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/admin-press.png"))); // NOI18N
@@ -67,7 +67,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         pilotButton.setBorder(null);
         pilotButton.setBorderPainted(false);
         pilotButton.setContentAreaFilled(false);
-        pilotButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pilotButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pilotButton.setFocusPainted(false);
         pilotButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pilotButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/piloto-press.png"))); // NOI18N
@@ -87,7 +87,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         controlButton.setBorder(null);
         controlButton.setBorderPainted(false);
         controlButton.setContentAreaFilled(false);
-        controlButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        controlButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         controlButton.setFocusPainted(false);
         controlButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         controlButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/control-press.png"))); // NOI18N

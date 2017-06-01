@@ -18,6 +18,7 @@ import bridge.Vuelo;
 import composite.proxy.Piloto;
 import composite.proxy.PilotoProxy;
 import composite.singleton.TripulacionReal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,9 +34,9 @@ import registro.RegistroVuelos;
  * nuestra base de datos
  */
 public class Almacen {
-
-    public static List<RegistroPruebasSimulacion> registroPruebasSimulacion = new ArrayList<>();
-    public static Map<Integer, Aeropuerto> aeropuertos = new HashMap<>();
+    
+    public static List<RegistroPruebasSimulacion> registroPruebasSimulacion= new ArrayList<>();
+    public static List<Aeropuerto> aeropuertos=new ArrayList<>();
     public static Escenario escenario1 = new Escenario1();
     public static Escenario escenario2 = new Escenario2();
     public static Escenario escenario3 = new Escenario3();
@@ -65,7 +66,43 @@ public class Almacen {
         }
         return piloto;
     }
+    
+    /**
+     * Metodo que guarda la prueba de simulacion verificando si existe previamente para este escenario para sustituirla o agregar una nueva
+     * @param rps 
+     */
+    public static void registrarPruebaSimulacion(RegistroPruebasSimulacion rps){
+    
+        int indice = -1;
+        
 
+        for(RegistroPruebasSimulacion r: registroPruebasSimulacion){
+            //System.out.println(r.getEscenario().getNombre());
+            if( (r.getEscenario().getNombre().compareTo(rps.getEscenario().getNombre()) == 0) && (r.getPiloto().getnEmpleado() ==  rps.getPiloto().getnEmpleado()) ){
+                indice = registroPruebasSimulacion.indexOf(r);
+                break;
+            }
+        }
+        
+        if(indice >= 0 ){
+            registroPruebasSimulacion.set(indice, rps);
+        }else{
+            registroPruebasSimulacion.add(rps);
+        }
+        
+        
+    }
+    
+    public static Piloto getPilotoByNempleado(int ne){
+        Piloto piloto = null;
+        for(Piloto p: PILOTOS){
+            if(p.getnEmpleado() == ne){
+                piloto = p;
+            }
+        }
+        return piloto;
+    }
+    
     //Metodo estatico para obtener las simulaciones de un piloto dado , segun su numeroDeEmpleado
     public static String[] getSimulacionesPiloto(String numeroEmpleado) {
         List<String> respuesta = new ArrayList<>();
@@ -155,14 +192,14 @@ public class Almacen {
     public static String getCalificacionSimulacion(String nombreEscenario) {
         String respuesta = "";
         String[] valores = nombreEscenario.split("-");
-
-        for (RegistroPruebasSimulacion r : Almacen.registroPruebasSimulacion) {
-            if (r.getPiloto() != null) {
-                if ((r.getPiloto().getNombre().compareTo(valores[0]) == 0) && (r.getEscenario().getNombre().compareTo(valores[1]) == 0)) {
-                    respuesta = "Escenario: " + r.getEscenario().getNombre() + "<br/>Calificaicon Meteorologica: " + r.getCalificacionMeteorologica() + "<br/>";
-                    respuesta = respuesta + "Calificacion Orografica: " + r.getCalificacionOrografica() + "<br/>";
-                    respuesta = respuesta + "Calificacion Visibilidad: " + r.getCalificacionVisibilidad() + "<br/>";
-                    respuesta = respuesta + "Fecha: " + r.getFecha() + "<br/>";
+        
+        for(RegistroPruebasSimulacion r: Almacen.registroPruebasSimulacion){
+            if(r.getPiloto() != null){
+                if((r.getPiloto().getNombre().compareTo(valores[0]) == 0) && (r.getEscenario().getNombre().compareTo(valores[1]) == 0) ){
+                    respuesta = "Escenario: "+r.getEscenario().getNombre()+"<br/>Calificaicon Meteorologica: "+r.getCalificacionMeteorologica()+"<br/>";
+                    respuesta = respuesta + "Calificacion Orografica: "+r.getCalificacionOrografica()+"<br/>";
+                    respuesta = respuesta + "Calificacion Visibilidad: "+r.getCalificacionVisibilidad()+"<br/>";
+                    respuesta = respuesta + "Fecha: "+new SimpleDateFormat("dd-MM-yyyy").format(r.getFecha())+"<br/>";
                     respuesta = respuesta + "=================<br/>";
 
                     String temp = obtenerDatosCondiciones(r.getEscenario().getMeteorologica());
