@@ -232,5 +232,62 @@ public class Almacen {
         return respuesta;
     }
     
+       /**
+     * Método estatico para recuperar los vuelos que pertenecen a un piloto
+     *
+     * @param numeroEmpleado
+     * @return
+     */
+    public static String getVuelosPiloto(String numeroEmpleado) {
+        String respuesta = "";
+
+        for (Entry<Integer, RegistroVuelos> e : registroVuelos.entrySet()) {
+            TripulacionReal x = (TripulacionReal) e.getValue().getTripulacion();
+            if (String.valueOf(x.getTripulacion()[0].getnEmpleado()).compareTo(numeroEmpleado) == 0
+                    || String.valueOf(x.getTripulacion()[1].getnEmpleado()).compareTo(numeroEmpleado) == 0) {
+                respuesta = "Número de vuelo: " + String.valueOf(e.getValue().getVuelo().getNumeroVuelo()) + "<br>"
+                        + "Aeropuerto destino: " + e.getValue().getVuelo().getAeropuertoEntrada().getNombre() + "<br>"
+                        + "Aeropuerto salida: " + e.getValue().getVuelo().getAeropuertoSalida().getNombre() + "<br>"
+                        + "Condiciones meteorológicas previstas: <br>"
+                        + getCaracteristicasVuelo(String.valueOf(e.getValue().getVuelo().getNumeroVuelo()));
+            } else {
+                respuesta = "No tiene vuelos asignados";
+            }
+        }
+        return respuesta;
+    }
+
+    /**
+     * Método estatico para recuperar los escenarios
+     */
+    public static String getEscenarios() {
+        String respuesta = "";
+        respuesta = "<b>Escenario 1: </b>" + escenario1.getNombre()+"<br>"
+                + obtenerDatosCondiciones(escenario1.getMeteorologica())+"<br>"
+                + obtenerDatosCondiciones(escenario1.getOrografica())+"<br>"
+                + obtenerDatosCondiciones(escenario1.getVisibilidad())+"<br>"
+                + "<b>Escenario 2: </b>" + escenario2.getNombre()+"<br>"
+                + obtenerDatosCondiciones(escenario2.getMeteorologica())+"<br>"
+                + obtenerDatosCondiciones(escenario2.getOrografica())+"<br>"
+                + obtenerDatosCondiciones(escenario2.getVisibilidad())+"<br>"
+                + "<b>Escenario 3: </b>" + escenario3.getNombre()+"<br>"
+                + obtenerDatosCondiciones(escenario3.getMeteorologica())+"<br>"
+                + obtenerDatosCondiciones(escenario3.getOrografica())+"<br>"
+                + obtenerDatosCondiciones(escenario3.getVisibilidad())+"<br>"
+                + "<b>Escenario 4: </b>" + escenario4.getNombre()+"<br>"
+                + obtenerDatosCondiciones(escenario4.getMeteorologica())+"<br>"
+                + obtenerDatosCondiciones(escenario4.getOrografica())+"<br>"
+                + obtenerDatosCondiciones(escenario4.getVisibilidad())+"<br>"
+                + "<b>Escenario 5: </b>" + escenario5.getNombre()+"<br>"
+                + obtenerDatosCondiciones(escenario5.getMeteorologica())+"<br>"
+                + obtenerDatosCondiciones(escenario5.getOrografica())+"<br>"
+                + obtenerDatosCondiciones(escenario5.getVisibilidad())+"<br>"
+                + "<b>Escenario 6: </b>" + escenario6.getNombre()+"<br>"
+                + obtenerDatosCondiciones(escenario6.getMeteorologica())+"<br>"
+                + obtenerDatosCondiciones(escenario6.getOrografica())+"<br>"
+                + obtenerDatosCondiciones(escenario6.getVisibilidad());
+
+        return respuesta;
+    }
     
 }

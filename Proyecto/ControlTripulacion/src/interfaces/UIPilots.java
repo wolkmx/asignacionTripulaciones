@@ -7,8 +7,8 @@ package interfaces;
 
 import static almacen.Almacen.*;
 import bridge.Vuelo;
-import java.util.List;
-import javax.swing.ListModel;
+import composite.proxy.Piloto;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +16,8 @@ import javax.swing.ListModel;
  */
 public class UIPilots extends javax.swing.JFrame {
 
+    public static int npiloto;
+//
     private void listaVuelos() {
         String listado = "";
         for (Vuelo vuelo : VUELOS) {
@@ -52,7 +54,7 @@ public class UIPilots extends javax.swing.JFrame {
 //            listVuelos.append("Condiciones técnicas previstas: \n");
 //            listVuelos.append(vuelo.getTecnica().toString());
             listado = listado + "------------------------------------------------------------------------------------ <br>";
-            listado = listado + getCaracteristicasVuelo("" + vuelo.getNumeroVuelo());
+            listado = listado + getCaracteristicasVuelo(String.valueOf(vuelo.getNumeroVuelo()));
         }
         listVuelos.setText(listado);
     }
@@ -77,12 +79,14 @@ public class UIPilots extends javax.swing.JFrame {
     private void initComponents() {
 
         returnButton = new javax.swing.JButton();
-        consultarVuelosButton = new javax.swing.JButton();
-        inoutFindPilot = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         listVuelos = new javax.swing.JTextPane();
+        jPanel2 = new javax.swing.JPanel();
+        escenarioButton = new javax.swing.JButton();
+        simulacionButton = new javax.swing.JButton();
+        inputPiloto = new javax.swing.JTextField();
+        consultarVuelosButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Interfaz Pilotos");
@@ -106,39 +110,99 @@ public class UIPilots extends javax.swing.JFrame {
         });
         getContentPane().add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 11, -1, -1));
 
-        consultarVuelosButton.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
-        consultarVuelosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
-        consultarVuelosButton.setText("Buscar Vuelos");
-        consultarVuelosButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarVuelosButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(consultarVuelosButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, -1, -1));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Vuelos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 14))); // NOI18N
 
-        inoutFindPilot.setText("Ingrese su número de piloto");
-        getContentPane().add(inoutFindPilot, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 260, 30));
-
+        listVuelos.setEditable(false);
         jScrollPane3.setViewportView(listVuelos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 186, Short.MAX_VALUE))
+            .addGap(0, 396, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 462, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
         );
 
-        jScrollPane2.setViewportView(jPanel1);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 490));
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 490, 470));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones Piloto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("HP Simplified Light", 0, 14))); // NOI18N
+
+        escenarioButton.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
+        escenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/escenario.png"))); // NOI18N
+        escenarioButton.setText("Consultar Escenarios");
+        escenarioButton.setIconTextGap(15);
+        escenarioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escenarioButtonActionPerformed(evt);
+            }
+        });
+
+        simulacionButton.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
+        simulacionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/simulacion.png"))); // NOI18N
+        simulacionButton.setText("Realizar Simulación");
+        simulacionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simulacionButtonActionPerformed(evt);
+            }
+        });
+
+        inputPiloto.setText("Ingrese su número de piloto");
+        inputPiloto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPilotoFocusGained(evt);
+            }
+        });
+
+        consultarVuelosButton.setFont(new java.awt.Font("HP Simplified Light", 1, 12)); // NOI18N
+        consultarVuelosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
+        consultarVuelosButton.setText("Buscar Vuelos");
+        consultarVuelosButton.setIconTextGap(20);
+        consultarVuelosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarVuelosButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(escenarioButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addComponent(inputPiloto, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(consultarVuelosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(simulacionButton, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(consultarVuelosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(escenarioButton)
+                    .addComponent(simulacionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 430, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -150,16 +214,55 @@ public class UIPilots extends javax.swing.JFrame {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void consultarVuelosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarVuelosButtonActionPerformed
-
+        npiloto = Integer.parseInt(inputPiloto.getText());
+        listVuelos.setText(getVuelosPiloto(inputPiloto.getText()));
     }//GEN-LAST:event_consultarVuelosButtonActionPerformed
+
+    private void inputPilotoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPilotoFocusGained
+        inputPiloto.setText(null);
+    }//GEN-LAST:event_inputPilotoFocusGained
+
+    private void escenarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escenarioButtonActionPerformed
+        listVuelos.setText(getEscenarios());
+    }//GEN-LAST:event_escenarioButtonActionPerformed
+
+    private void simulacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulacionButtonActionPerformed
+
+        if (inputPiloto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor de ingresar su numero de piloto", "Alerta Piloto", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            boolean b = false;
+            npiloto = Integer.parseInt(inputPiloto.getText());
+            for (Piloto p : PILOTOS) {
+                if (npiloto == p.getnEmpleado()) {
+                    b = true;
+                    UISimulacion uisi = new UISimulacion();
+                    uisi.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                }
+            }
+            if (b) {
+                System.out.println();
+            } else {
+                JOptionPane.showMessageDialog(null, "El numero de piloto no existe", "Alerta Piloto", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Favor de ingresar un valor númerico", "Alerta Piloto", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_simulacionButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultarVuelosButton;
-    private javax.swing.JTextField inoutFindPilot;
+    private javax.swing.JButton escenarioButton;
+    private javax.swing.JTextField inputPiloto;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextPane listVuelos;
     private javax.swing.JButton returnButton;
+    private javax.swing.JButton simulacionButton;
     // End of variables declaration//GEN-END:variables
 }
