@@ -65,6 +65,31 @@ public class Almacen {
         return piloto;
     }
     
+    /**
+     * Metodo que guarda la prueba de simulacion verificando si existe previamente para este escenario para sustituirla o agregar una nueva
+     * @param rps 
+     */
+    public static void registrarPruebaSimulacion(RegistroPruebasSimulacion rps){
+    
+        for(RegistroPruebasSimulacion r: registroPruebasSimulacion){
+            if( (r.getEscenario().getNombre().compareTo(rps.getEscenario().getNombre()) == 0) && (r.getPiloto().getnEmpleado() ==  rps.getPiloto().getnEmpleado()) ){
+                
+            }
+        }
+        
+        
+    }
+    
+    public static Piloto getPilotoByNempleado(int ne){
+        Piloto piloto = null;
+        for(Piloto p: PILOTOS){
+            if(p.getnEmpleado() == ne){
+                piloto = p;
+            }
+        }
+        return piloto;
+    }
+    
     //Metodo estatico para obtener las simulaciones de un piloto dado , segun su numeroDeEmpleado
     public static String[] getSimulacionesPiloto(String numeroEmpleado){
         List<String> respuesta = new ArrayList<>();

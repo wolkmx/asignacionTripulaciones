@@ -84,6 +84,7 @@ public class UIcontrol extends javax.swing.JFrame {
         jLabelNombrePiloto = new javax.swing.JLabel();
         jLabelNombreCopiloto = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -219,6 +220,13 @@ public class UIcontrol extends javax.swing.JFrame {
         });
         jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
 
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,7 +235,9 @@ public class UIcontrol extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -259,7 +269,9 @@ public class UIcontrol extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton4))
                 .addGap(54, 54, 54))
         );
 
@@ -303,6 +315,7 @@ public class UIcontrol extends javax.swing.JFrame {
         Piloto pp = new Piloto();
         pp.setNombre("Prueba1");
         pp.setVolando(true);
+        pp.setnEmpleado(38);
         Almacen.PILOTOS.add(pp);
         Piloto p = new Piloto();
         p.setNombre("Prueba2");
@@ -523,6 +536,12 @@ public class UIcontrol extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+         UISimulacion interfazSimula = new UISimulacion();
+        interfazSimula.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * Metodo para verificar la existencia de la tripulacion y por lo tanto hacer uso del singleton
      */
@@ -535,6 +554,7 @@ public class UIcontrol extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBoxListadoPilotosOperador;
     private javax.swing.JComboBox<String> jComboBoxListadoSimulacionPilotosOperador;
     private javax.swing.JComboBox<String> jComboBoxVuelosDisponiblesControlVuelo;
