@@ -15,3 +15,5 @@ hs_err_pid*
 /Proyecto/ControlTripulacion/dist/
 /Proyecto/ControlTripulacion/nbproject/
 Proyecto/ControlTripulacion/nbbuild.xml
+/Proyecto/ControlTripulacion/src/Bridge/Vuelo.java
+/Proyecto/ControlTripulacion/src/Bridge/Aeropuerto.java
