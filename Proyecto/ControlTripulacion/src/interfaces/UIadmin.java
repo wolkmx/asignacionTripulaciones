@@ -34,8 +34,27 @@ public class UIadmin extends javax.swing.JFrame {
     Ciudad ciudad;
     Canion canion;   
     Random random;
-    {
-        Constructor constructor=new ConstructorAeropuerto();
+    /**
+     * Creates new form UIadmin
+     */
+    public UIadmin() {
+        initComponents();
+        random=new Random();
+        vuelo=new Vuelo();
+        niebla=null;
+        relampagos=null;
+        luz=null;
+        turbulencia=null;
+        viento=null;
+        lluvia=null;
+        montania=null;
+        ciudad=null;
+        canion=null;
+        this.setLocationRelativeTo(null);
+        card.setVisible(false);
+        panelPiloto.setVisible(false);
+        panelVuelo.setVisible(false);        
+               Constructor constructor=new ConstructorAeropuerto();
         DirectorAeropuertos director=new DirectorAeropuertos(constructor);
         director.constructAeropuerto(1, "Atlanta", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
         aeropuertos.add(director.getAeropuerto());        
@@ -75,28 +94,6 @@ public class UIadmin extends javax.swing.JFrame {
         director=new DirectorAeropuertos(constructor);
         director.constructAeropuerto(10, "Ciudad de Mexico", "Internacional",new Tecnica(random.nextInt(10)+1,random.nextInt(100)+1));
         aeropuertos.add(director.getAeropuerto());
-    }
-    /**
-     * Creates new form UIadmin
-     */
-    public UIadmin() {
-        initComponents();
-        random=new Random();
-        vuelo=new Vuelo();
-        niebla=null;
-        relampagos=null;
-        luz=null;
-        turbulencia=null;
-        viento=null;
-        lluvia=null;
-        montania=null;
-        ciudad=null;
-        canion=null;
-        this.setLocationRelativeTo(null);
-        card.setVisible(false);
-        panelPiloto.setVisible(false);
-        panelVuelo.setVisible(false);        
-               
         for(int i=0;i<aeropuertos.size();i++){
             origen.addItem(aeropuertos.get(i).getNombre());
         }
