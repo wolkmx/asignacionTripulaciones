@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class UIPilots extends javax.swing.JFrame {
 
     public static int npiloto;
-
+//
     private void listaVuelos() {
         String listado = "";
         for (Vuelo vuelo : VUELOS) {
