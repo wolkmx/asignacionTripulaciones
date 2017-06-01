@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import registro.RegistroPruebasSimulacion;
+import simulador.Simulador;
 
 /**
  *
@@ -140,56 +141,58 @@ public class UISimulacion extends javax.swing.JFrame {
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Primero obtenemos el escenario seleccionado
-        Escenario escenario = getEscenarioSeleccionado(jComboBoxEscenarios.getSelectedItem().toString());
-        
-        RegistroPruebasSimulacion rps = new RegistroPruebasSimulacion();
-        rps.setEscenario(escenario);
-        rps.setPiloto(piloto);
-        rps.setFecha(new Date());
-        
-        rps.setCalificacionMeteorologica(MAXIMIZED_HORIZ);
-        rps.setCalificacionOrografica(ICONIFIED);
-        rps.setCalificacionVisibilidad(ICONIFIED);
+        int escenario = getEscenarioSeleccionado(jComboBoxEscenarios.getSelectedItem().toString());
+
+        RegistroPruebasSimulacion rps = Simulador.getRegistro(escenario, piloto);
         
         Almacen.registrarPruebaSimulacion(rps);
+        
+        //Se muestra el resultado
+        jTextPaneResultadoSimulacion.setContentType("text/html");
+        
+        String resultado = "";
+        
+        resultado = resultado + "Calificaicon obtenida en las condicones Meteorologicas: "+ rps.getCalificacionMeteorologica()+ "<br/>";
+        resultado = resultado + "Calificaicon obtenida en las condicones Orograficas: "+ rps.getCalificacionOrografica()+ "<br/>";
+        resultado = resultado + "Calificaicon obtenida en las condicones de Visibilidad: "+ rps.getCalificacionVisibilidad()+ "<br/>";
+        
+        jTextPaneResultadoSimulacion.setText("<html><body style='width:100%;'>"+resultado+"</body></html>");
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private Escenario getEscenarioSeleccionado(String nombre){
-        Escenario e = null;
-        try {
+    private int getEscenarioSeleccionado(String nombre){
+        int e;
+
         switch(nombre){
             case "Escenario 1":
-                    e = (Escenario)Almacen.escenario1.clone();
+                    e = 1;
                     break;
   
             case "Escenario 2":
-                 e = (Escenario)Almacen.escenario2.clone();
+                 e = 2;
                 break;
   
             case "Escenario 3":
-                 e = (Escenario)Almacen.escenario3.clone();
+                 e = 3;
                 break;   
   
             case "Escenario 4":
-                 e = (Escenario)Almacen.escenario4.clone();
+                 e = 4;
                 break;      
   
             case "Escenario 5":
-                 e = (Escenario)Almacen.escenario5.clone();
+                 e = 5;
                 break;  
   
             case "Escenario 6":
-                 e = (Escenario)Almacen.escenario6.clone();
+                 e = 6;
                 break;  
             default:
-                e = null;
+                e = 1;
                 break;
             }
-        } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(UISimulacion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
         return e;
     }
     

@@ -18,6 +18,7 @@ import bridge.Vuelo;
 import composite.proxy.Piloto;
 import composite.proxy.PilotoProxy;
 import composite.singleton.TripulacionReal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,10 +72,21 @@ public class Almacen {
      */
     public static void registrarPruebaSimulacion(RegistroPruebasSimulacion rps){
     
+        int indice = -1;
+        
+
         for(RegistroPruebasSimulacion r: registroPruebasSimulacion){
+            //System.out.println(r.getEscenario().getNombre());
             if( (r.getEscenario().getNombre().compareTo(rps.getEscenario().getNombre()) == 0) && (r.getPiloto().getnEmpleado() ==  rps.getPiloto().getnEmpleado()) ){
-                
+                indice = registroPruebasSimulacion.indexOf(r);
+                break;
             }
+        }
+        
+        if(indice >= 0 ){
+            registroPruebasSimulacion.set(indice, rps);
+        }else{
+            registroPruebasSimulacion.add(rps);
         }
         
         
@@ -184,7 +196,7 @@ public class Almacen {
                     respuesta = "Escenario: "+r.getEscenario().getNombre()+"<br/>Calificaicon Meteorologica: "+r.getCalificacionMeteorologica()+"<br/>";
                     respuesta = respuesta + "Calificacion Orografica: "+r.getCalificacionOrografica()+"<br/>";
                     respuesta = respuesta + "Calificacion Visibilidad: "+r.getCalificacionVisibilidad()+"<br/>";
-                    respuesta = respuesta + "Fecha: "+r.getFecha()+"<br/>";
+                    respuesta = respuesta + "Fecha: "+new SimpleDateFormat("dd-MM-yyyy").format(r.getFecha())+"<br/>";
                     respuesta = respuesta + "=================<br/>";
                     
                     String temp = obtenerDatosCondiciones(r.getEscenario().getMeteorologica());
