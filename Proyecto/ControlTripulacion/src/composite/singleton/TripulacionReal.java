@@ -5,7 +5,10 @@
  */
 package composite.singleton;
 
+import almacen.Almacen;
+import composite.proxy.Piloto;
 import java.util.Date;
+import template.Usuario;
 
 /**
  *
@@ -13,7 +16,7 @@ import java.util.Date;
  */
 public class TripulacionReal extends Tripulacion {
 
-    Tripulacion tripulantes[] = new Tripulacion[2];
+    private Usuario tripulantes[] = new Usuario[2];
 
     //Singleton
     private static TripulacionReal tripulacion;
@@ -21,11 +24,48 @@ public class TripulacionReal extends Tripulacion {
     public TripulacionReal() {
     }
     
-    public static TripulacionReal getTripulacion() {
-        if (tripulacion == null) {
+    public void setTripulante(int index, Usuario tripulante){
+        this.tripulantes[index] = tripulante;
+    }
+    
+    public Usuario[] getTripulacion(){
+        return this.tripulantes;
+    }
+    
+    public static TripulacionReal getTripulacion(Piloto piloto, Piloto copiloto) {
+        //Aqui hago dos verificaciones la primera si no existe ya una tripulacion con esta combinacion
+        if (!existeTripulacion(piloto, copiloto)) {
             tripulacion = new TripulacionReal();
+            tripulacion.setTripulante(0, piloto);
+            tripulacion.setTripulante(1,copiloto);
+            Almacen.TRIPULACIONES.add(tripulacion);
+        }else{
+             for(TripulacionReal t: Almacen.TRIPULACIONES){           
+                if( (t.tripulantes[0].getNombre().compareTo(piloto.getNombre()) == 0) &&  (t.tripulantes[1].getNombre().compareTo(copiloto.getNombre()) == 0)){
+                    tripulacion = t;
+                    break;
+                }
+            }
         }
         return tripulacion;
+    }
+    
+    private static boolean existeTripulacion(Piloto piloto, Piloto copiloto){
+    
+        boolean respuesta = false;
+        
+        for(TripulacionReal t: Almacen.TRIPULACIONES){
+            
+            if( (t.tripulantes[0].getNombre().compareTo(piloto.getNombre()) == 0) &&  (t.tripulantes[1].getNombre().compareTo(copiloto.getNombre()) == 0)){
+                respuesta = true;
+                break;
+            }
+            
+        }
+        
+        
+        return respuesta;
+        
     }
 
     @Override

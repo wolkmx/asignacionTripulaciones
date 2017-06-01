@@ -50,7 +50,7 @@ public class Vuelo implements UsuarioCondiciones{
         condicionVisibilidad[posicion]=nueva;
     }
     public void addOrografica(Condiciones nueva,int posicion){
-        condicionMeteorologica[posicion]=nueva;
+        condicionOrografica[posicion]=nueva;
     }
     @Override
     public Condiciones[] getMeteorologica(){
@@ -70,7 +70,5 @@ public class Vuelo implements UsuarioCondiciones{
     public Condiciones getTecnica() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
     
 }

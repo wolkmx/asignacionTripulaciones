@@ -11,11 +11,26 @@ import composite.proxy.PilotoSubject;
 import javax.swing.DefaultComboBoxModel;
 import almacen.Almacen;
 import static almacen.Almacen.registroPruebasSimulacion;
+import bridge.Canion;
+import bridge.Ciudad;
+import bridge.Condiciones;
+import bridge.Lluvia;
+import bridge.LuzSolar;
+import bridge.Montania;
+import bridge.Niebla;
+import bridge.Relampagos;
+import bridge.Turbulencia;
+import bridge.Viento;
+import bridge.Vuelo;
 import bridge.prototype.Escenario;
+import composite.singleton.TripulacionReal;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
 import registro.RegistroPruebasSimulacion;
+import registro.RegistroVuelos;
+import template.Usuario;
 
 /**
  *
@@ -23,6 +38,8 @@ import registro.RegistroPruebasSimulacion;
  */
 public class UIcontrol extends javax.swing.JFrame {
 
+    Piloto pilotos[] = new Piloto[2];
+    
     /**
      * Creates new form UIcontrol
      */
@@ -40,6 +57,7 @@ public class UIcontrol extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         returnButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -51,6 +69,21 @@ public class UIcontrol extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPaneResultadoSimulaciones = new javax.swing.JEditorPane();
         jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxVuelosDisponiblesControlVuelo = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPaneCaracteristicasVuelo = new javax.swing.JEditorPane();
+        jPanel6 = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelNombrePiloto = new javax.swing.JLabel();
+        jLabelNombreCopiloto = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -74,7 +107,11 @@ public class UIcontrol extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Analisis Pilotos"));
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(196, 32767));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Piloto:");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jComboBoxListadoPilotosOperador.setModel(new DefaultComboBoxModel(Almacen.PILOTOS.toArray()));
         jComboBoxListadoPilotosOperador.addActionListener(new java.awt.event.ActionListener() {
@@ -82,43 +119,17 @@ public class UIcontrol extends javax.swing.JFrame {
                 jComboBoxListadoPilotosOperadorActionPerformed(evt);
             }
         });
+        jPanel2.add(jComboBoxListadoPilotosOperador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel2.setText("Simulaciones:");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jComboBoxListadoSimulacionPilotosOperador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxListadoSimulacionPilotosOperadorActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxListadoPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxListadoSimulacionPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBoxListadoPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxListadoSimulacionPilotosOperador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
+        jPanel2.add(jComboBoxListadoSimulacionPilotosOperador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados:"));
         jPanel3.setToolTipText("");
@@ -149,6 +160,65 @@ public class UIcontrol extends javax.swing.JFrame {
             }
         });
 
+        jPanel4.setMaximumSize(new java.awt.Dimension(200, 32767));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setText("Vuelos Disponibles:");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        jComboBoxVuelosDisponiblesControlVuelo.setModel(new DefaultComboBoxModel(Almacen.getVuelosExistentes()));
+        jComboBoxVuelosDisponiblesControlVuelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxVuelosDisponiblesControlVueloActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jComboBoxVuelosDisponiblesControlVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Caracteristicas del vuelo"));
+        jPanel5.setMaximumSize(new java.awt.Dimension(234, 182));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setViewportView(jEditorPaneCaracteristicasVuelo);
+
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 18, 223, 164));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tripulación"));
+        jPanel6.setMaximumSize(new java.awt.Dimension(220, 2147483647));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Piloto");
+        jPanel6.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Copiloto");
+        jPanel6.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jButton2.setText("Seleccionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+
+        jLabel4.setText("Piloto: ");
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        jLabel5.setText("Copiloto:");
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jPanel6.add(jLabelNombrePiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        jPanel6.add(jLabelNombreCopiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+
+        jButton3.setText("Asignar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,26 +226,39 @@ public class UIcontrol extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jButton1)))
-                .addContainerGap(312, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(54, 54, 54))
         );
@@ -203,7 +286,6 @@ public class UIcontrol extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("Analisis Pilotos");
         jPanel1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
@@ -218,15 +300,16 @@ public class UIcontrol extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         /*Quitar es solo para prueba*/
-        Piloto ppp = new Piloto();
-        ppp.setNombre("");
-        Almacen.PILOTOS.add(ppp);
         Piloto pp = new Piloto();
         pp.setNombre("Prueba1");
+        pp.setVolando(true);
         Almacen.PILOTOS.add(pp);
         Piloto p = new Piloto();
         p.setNombre("Prueba2");
         Almacen.PILOTOS.add(p);
+        Piloto ppp = new Piloto();
+        ppp.setNombre("Prueba3");
+        Almacen.PILOTOS.add(ppp);
         
         
         RegistroPruebasSimulacion prueba1 = new RegistroPruebasSimulacion();
@@ -256,6 +339,81 @@ public class UIcontrol extends javax.swing.JFrame {
         Almacen.registroPruebasSimulacion.add(prueba1);
         Almacen.registroPruebasSimulacion.add(prueba2);
         
+        //Vuelos
+        
+        Vuelo vuelo1 = new Vuelo();
+        vuelo1.setNumeroVuelo(445);
+        
+        Lluvia l = new Lluvia();
+        l.setNombre("Ligera");
+        l.setPesoRelativo(.15f);
+        l.setDificultad(3);
+        
+        vuelo1.addMeteorologica(l,0);
+        
+        Viento v = new Viento();
+        v.setNombre("Poco Viento");
+        v.setPesoRelativo(.10f);
+        v.setDificultad(1);
+        
+        vuelo1.addMeteorologica(v,1);
+        
+        Turbulencia t = new Turbulencia();
+        t.setNombre("Sin turbulencia");
+        t.setDificultad(0);
+        t.setPesoRelativo(.20f);
+        
+        vuelo1.addMeteorologica(t,2);
+        
+        LuzSolar ls = new LuzSolar();
+        ls.setNombre("Soleado");
+        ls.setDificultad(0);
+        ls.setPesoRelativo(.10f);
+        
+        vuelo1.addVisibilidad(ls,0);
+        
+        Relampagos r = new Relampagos();
+        r.setNombre("Sin Relampago");
+        r.setDificultad(0);
+        r.setPesoRelativo(.10f);
+        
+        vuelo1.addVisibilidad(r,1);
+        
+        Niebla n = new Niebla();
+        n.setNombre("Sin niebla");
+        n.setDificultad(0);
+        n.setPesoRelativo(.05f);
+        
+        vuelo1.addVisibilidad(n,2);
+        
+        Montania mo = new Montania();
+        mo.setNombre("Sin Montaña");
+        mo.setDificultad(0);
+        mo.setPesoRelativo(.10f);
+        
+        vuelo1.addOrografica(mo,0);
+        
+        Ciudad ci = new Ciudad();
+        ci.setNombre("Ciudad Pequeña");
+        ci.setDificultad(2);
+        ci.setPesoRelativo(.05f);
+        
+        vuelo1.addOrografica(ci,1);
+        
+        
+       Canion ca = new Canion();
+        ca.setNombre("Sin Cañon");
+        ca.setDificultad(1);
+        ca.setPesoRelativo(.15f);
+        
+        vuelo1.addOrografica(ca,2);
+        
+        
+        RegistroVuelos registroVuelos1 = new RegistroVuelos();
+        registroVuelos1.setVuelo(vuelo1);
+        
+        Almacen.registroVuelos.put(vuelo1.getNumeroVuelo(), registroVuelos1);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxListadoPilotosOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListadoPilotosOperadorActionPerformed
@@ -275,16 +433,129 @@ public class UIcontrol extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBoxListadoSimulacionPilotosOperadorActionPerformed
 
+    private void jComboBoxVuelosDisponiblesControlVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxVuelosDisponiblesControlVueloActionPerformed
+        //System.out.println("----->"+jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString());
+        String caracteristicas = Almacen.getCaracteristicasVuelo(jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString());
+        
+        jEditorPaneCaracteristicasVuelo.setContentType("text/html");
+        jEditorPaneCaracteristicasVuelo.setText(caracteristicas);
+        
+    }//GEN-LAST:event_jComboBoxVuelosDisponiblesControlVueloActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        if( (jComboBoxListadoPilotosOperador.getSelectedItem().toString().compareTo("") != 0) &&  (jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString().compareTo("") != 0)){
+            
+            //Se hace uso del proxy
+            if(jRadioButton1.isSelected()){
+                if(jLabelNombreCopiloto.getText().compareTo(jComboBoxListadoPilotosOperador.getSelectedItem().toString()) == 0){
+                    showMessageDialog(null, "Este piloto ya esta asginado como copiloto");
+                }else{
+                    PilotoProxy pp = Almacen.getPilotoDisponible(jComboBoxListadoPilotosOperador.getSelectedItem().toString());
+                    PilotoSubject ps = pp.obtener();
+                    
+                    if(ps == null){
+                         showMessageDialog(null, "Este piloto esta volando");
+                    }else{
+                        pilotos[0] = Almacen.getPiloto(jComboBoxListadoPilotosOperador.getSelectedItem().toString());
+                        jLabelNombrePiloto.setText(jComboBoxListadoPilotosOperador.getSelectedItem().toString()); 
+                        //Se debe hacer uso del singleton
+                        if(jLabelNombrePiloto.getText().compareTo("") == 0 && jLabelNombreCopiloto.getText().compareTo("") == 0){
+                           tripulacion(); 
+                        }
+                        
+                    }
+                    
+                }
+                
+            }else{
+                if(jLabelNombrePiloto.getText().compareTo(jComboBoxListadoPilotosOperador.getSelectedItem().toString()) == 0){
+                    showMessageDialog(null, "Este piloto ya esta asginado como piloto");
+                }else{
+                     PilotoProxy pp = Almacen.getPilotoDisponible(jComboBoxListadoPilotosOperador.getSelectedItem().toString());
+                        PilotoSubject ps = pp.obtener();
+                    
+                        if(ps == null){
+                             showMessageDialog(null, "Este piloto esta volando");
+                        }else{
+                        pilotos[1] = Almacen.getPiloto(jComboBoxListadoPilotosOperador.getSelectedItem().toString());
+                        jLabelNombreCopiloto.setText(jComboBoxListadoPilotosOperador.getSelectedItem().toString());
+                        
+                        //Se debe hacer uso del singleton
+                        if(jLabelNombrePiloto.getText().compareTo("") == 0 && jLabelNombreCopiloto.getText().compareTo("") == 0){
+                           tripulacion(); 
+                        }
+                    }
+                }
+            }
+
+
+            
+            
+        }else{
+            showMessageDialog(null, "Debe seleccionar un Piloto y un Vuelo");
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       //Se revisa que esten seleccionados dos pilotos
+       if(pilotos[0]!= null && pilotos[1] != null){
+           
+           //Se debe verificar si ya existe esta instancia de tripulacion para hacer uso de singleton, si ya existe nos regresa esa instancia, si no existe crea una nueva
+           TripulacionReal tr = TripulacionReal.getTripulacion(pilotos[0], pilotos[1]);
+           //Se verifica si estan en vuelo o no los pilotos
+           Usuario[] u = tr.getTripulacion();
+           if( ((Piloto)u[0]).getVolando() == false && ((Piloto)u[1]).getVolando() == false ){
+               
+               //Se asigna esta tripulacion al vuelo seleccionado
+               RegistroVuelos rv = Almacen.getVuelo(jComboBoxVuelosDisponiblesControlVuelo.getSelectedItem().toString());
+               
+               rv.setTripulacion(tr);
+               showMessageDialog(null, "Se asigno esta tripulacion: "+pilotos[0].getNombre()+" y "+pilotos[1].getNombre()+" al vuelo "+rv.getVuelo().getNumeroVuelo());
+               
+           }else{
+               showMessageDialog(null, "Esta tripulacion aun esta volando");
+           }
+           
+       }else{
+           showMessageDialog(null, "Debe seleccionar un Piloto y un Copiloto");
+       }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    /**
+     * Metodo para verificar la existencia de la tripulacion y por lo tanto hacer uso del singleton
+     */
+    public static void tripulacion(){
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBoxListadoPilotosOperador;
     private javax.swing.JComboBox<String> jComboBoxListadoSimulacionPilotosOperador;
+    private javax.swing.JComboBox<String> jComboBoxVuelosDisponiblesControlVuelo;
+    private javax.swing.JEditorPane jEditorPaneCaracteristicasVuelo;
     private javax.swing.JEditorPane jEditorPaneResultadoSimulaciones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNombreCopiloto;
+    private javax.swing.JLabel jLabelNombrePiloto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton returnButton;
     // End of variables declaration//GEN-END:variables

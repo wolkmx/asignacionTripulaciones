@@ -115,7 +115,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void pilotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilotButtonActionPerformed
-        UIpilotos interfazPilotos = new UIpilotos();
+        UIPilots interfazPilotos = new UIPilots();
         interfazPilotos.setVisible(true);
         dispose();
     }//GEN-LAST:event_pilotButtonActionPerformed

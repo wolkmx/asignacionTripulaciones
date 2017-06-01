@@ -5,6 +5,7 @@
  */
 package composite.singleton;
 
+import composite.proxy.Piloto;
 import template.Usuario;
 
 /**
@@ -16,8 +17,8 @@ public abstract class Tripulacion implements Usuario{
     private static Tripulacion instancia = null;
     protected Tripulacion(){}
     
-    public Tripulacion getInstancia(){
-        instancia = TripulacionReal.getTripulacion(); 
+    public Tripulacion getInstancia(Piloto piloto, Piloto copiloto){
+        instancia = TripulacionReal.getTripulacion(piloto, copiloto); 
         return instancia;
     }
     

@@ -14,6 +14,7 @@ import java.util.Date;
 public class Piloto implements PilotoSubject {
     
     public Piloto(){
+        this.volando = false;
     }
     
     //Para generar mis pilotos predefinidos en static
@@ -33,6 +34,15 @@ public class Piloto implements PilotoSubject {
     private int numeroVuelos;
     private int horasVuelo;
     private String observaciones;
+    private boolean volando;
+    
+    public boolean getVolando(){
+        return this.volando;
+    }
+    
+    public void setVolando(boolean volando){
+        this.volando = volando;
+    }
 
     public int getNumeroVuelos() {
         return numeroVuelos;
@@ -128,7 +138,8 @@ public class Piloto implements PilotoSubject {
         this.password = password;
     }
 
-    public PilotoSubject obtener() {
+    @Override
+    public Piloto obtener() {
         return this;
     }
     
